@@ -1,0 +1,4012 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyLGU</title>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+  body { font-family: 'Public Sans', sans-serif; background: #fff; color: #1e293b; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header { position: fixed; top: 0; width: 100%; background-color: #0A192F; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 82, 255, 0.2); z-index: 100; padding: 15px 0; }
+  .header-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 900; color: #1e293b; }
+  .logo svg { width: 20px; height: 20px; }
+  nav { display: none; gap: 20px; }
+  nav a { font-size: 13px; font-weight: 700; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* Hamburger Icon */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+
+  .menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: #1e293b;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  /* Desktop View */
+  @media (min-width: 768px) {
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+  }
+
+  /* Mobile View */
+  @media (max-width: 767px) {
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background:  #0A192F;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 82, 255, 0.2); 
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      gap: 16px;
+    }
+
+    nav a {
+      font-size: 14px;
+    }
+
+    nav.active {
+      display: flex;
+    }
+  }
+
+  /* Hero */
+  .badge { display: inline-flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 6px 15px; border-radius: 50px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; color: #475569; margin-bottom: 20px; }
+  .badge-dot { width: 6px; height: 6px; background: #1e293b; border-radius: 50%; }
+  h1 { font-size: 36px; font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin: 20px 0; }
+  h1 span { color: #cbd5e1; }
+  .hero p { font-size: 16px; color: #64748b; font-weight: 300; margin: 20px 0; }
+  /* Glow Pulse Badge */
+  .badge {
+    position: relative;
+    animation: badgeGlow 2s ease-in-out infinite;
+  }
+
+  /* Outer glow using box-shadow */
+  @keyframes badgeGlow {
+    0% {
+      opacity: 0.4;
+      box-shadow: 0 0 0 rgba(30, 41, 59, 0);
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 
+        0 0 12px rgba(30, 41, 59, 0.35),
+        0 0 24px rgba(30, 41, 59, 0.15);
+    }
+    100% {
+      opacity: 0.4;
+      box-shadow: 0 0 0 rgba(30, 41, 59, 0);
+    }
+  }
+
+
+  /* Phone mockup */
+  .phone { position: relative; width: 200px; margin: 0 auto; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; }
+  .phone:hover { transform: scale(1.1) translateY(-12px); box-shadow: 0 50px 100px rgba(0,0,0,0.3); background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(12px); z-index: 21; }
+  .phone-screen { width: 100%; height: 100%; border-radius: 20px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
+  .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21; }
+
+  /* Scroll Reveal Animation (Repeatable) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+  }
+
+  .reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optional stagger delays */
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+
+  /* Sections */
+  .section { padding: 60px 0;}
+  .bg-gray { background: #F9FAFB; }
+  .bg-light { background: #f1f5f9; }
+  .bg-white { background: #fff; }
+  .bg-dark { background: #1e293b; color: white; }
+  .text-center { text-align: center; }
+
+  h2 { font-size: 28px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+  h3 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+  .section-text { font-size: 14px; color: #64748b; max-width: 700px; margin: 0 auto 30px; line-height: 1.6; }
+
+  /* Grid */
+  .grid { display: grid; gap: 20px; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+
+  /* Cards */
+  .card { background: rgba(255,255,255,0.5); border: 1.5px solid rgba(30, 41, 59, 0.15); border-radius: 12px; padding: 20px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); transition: all 0.3s; }
+  .card-bar { width: 32px; height: 4px; margin-bottom: 16px; }
+  .card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .card p { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  /* Feature sections */
+  .feature-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; margin: 40px 0; }
+  .icon-box { width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .feature-title { font-size: 32px; font-weight: 900; margin: 16px 0; line-height: 1.1; }
+  .checklist { list-style: none; margin: 20px 0; }
+  .checklist li { display: flex; align-items: center; gap: 12px; margin: 12px 0; font-weight: 600; font-size: 13px; line-height: 1.4; }
+
+  /* Comparison */
+  .comparison { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0; }
+  .comp-card { padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; }
+
+  /* Caption */
+  .caption { position: absolute; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; box-shadow: 0 12px 15px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; max-width: 200px; z-index: 20; font-size: 14px; }
+  .caption p:first-child { font-size: 12px; font-weight: 900; text-transform: uppercase; margin-bottom: 4px; }
+  .caption p:last-child { font-size: 14px; font-weight: 700; }
+
+  /* Phone dual view */
+  .phone-dual { position: relative; height: 500px; display: flex; align-items: center; justify-content: center; margin: 20px 0; }
+  .phone-left { position: absolute; left: 10%; top: 50%; transform: translateY(-60%) scale(0.9); z-index: 20; }
+  .phone-right { position: absolute; right: 10%; top: 50%; transform: translateY(-40%) scale(0.9); z-index: 10; opacity: 0.9; }
+
+  /* Metrics */
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+  .metric-box { background: #ecfdf5; border: 1px solid #d1fae5; border-radius: 8px; padding: 12px; text-align: center; }
+  .metric-box p:first-child { font-size: 12px; font-weight: 900; color: #059669; text-transform: uppercase; }
+  .metric-box p:last-child { font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 4px; }
+
+  /* Services carousel */
+  .services { overflow: hidden; padding: 30px 0; }
+  .carousel { display: flex; gap: 20px; animation: scroll 40s linear infinite; }
+  @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .service-card { min-width: 280px; background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; transition: all 0.3s; }
+  .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); }
+  .service-icon { width: 50px; height: 50px; background: #f1f5f9; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; transition: all 0.3s; }
+  .service-card:hover .service-icon { background: #1e293b; color: white; }
+
+  /* CTA */
+  .cta-box { background: #f1f5f9; border-radius: 20px; padding: 40px 20px; text-align: center; border: 1px solid #e2e8f0; margin: 40px 0; }
+  .btn-store { background: #1e293b; color: white; padding: 12px 24px; border: none; border-radius: 12px; font-weight: 700; margin: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; }
+
+  /* Footer */
+  footer { background: #F9FAFB; padding: 50px 0 30px; border-top: 1px solid #e2e8f0; }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 30px; }
+  .footer-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 900; font-size: 15px; }
+  .footer-brand svg { width: 18px; height: 18px; }
+  footer h4 { font-size: 11px; font-weight: 900; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; }
+  footer ul { list-style: none; }
+  footer li { margin: 6px 0; font-size: 12px; font-weight: 700; }
+  footer a { color: #64748b; text-decoration: none; }
+  footer a:hover { color: #1e293b; }
+  .footer-bottom { padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 11px; font-weight: 900; color: #94a3b8; text-transform: uppercase; }
+
+  /* Tablet styles */
+  @media (min-width: 640px) {
+    .logo { font-size: 18px; gap: 12px; }
+    .logo svg { width: 24px; height: 24px; }
+    .btn { padding: 12px 20px; font-size: 12px; }
+    h1 { font-size: 48px; }
+    .hero p { font-size: 18px; }
+    .phone { width: 180px; }
+    .section { padding: 70px 0; }
+    h2 { font-size: 32px; }
+    .section-text { font-size: 16px; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .comparison { grid-template-columns: repeat(2, 1fr); }
+    .feature-title { font-size: 36px; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .cta-box { padding: 50px 40px; border-radius: 30px; }
+    .phone-dual { height: 550px; }
+    .phone-left { left: 5%; }
+    .phone-right { right: 5%; }
+  }
+
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    nav { display: flex; gap: 30px; }
+    .hero-grid { grid-template-columns: 3fr 2fr; }
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+    .phone { width: 240px; }
+    .section { padding: 80px 0; }
+    .footer-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* Large desktop */
+  @media (min-width: 1024px) {
+    h1 { font-size: 72px; }
+    h2 { font-size: 36px; }
+    .feature-title { font-size: 48px; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .phone-dual { height: 600px; }
+    .phone-left { transform: translateY(-60%) scale(1.0); left: -20px; }
+    .phone-right { transform: translateY(-40%) scale(1.0); right: -20px; }
+  }
+
+  /* Extra spacing for specific feature sections */
+  @media (min-width: 768px) {
+    #gov-services .feature-grid,
+    #healthcare .feature-grid,
+    #jobs .feature-grid,
+    #tourist .feature-grid {
+      gap: 60px;
+    }
+    
+    #gov-services .feature-grid { grid-template-columns: 2fr 3fr; }
+    #news .feature-grid { grid-template-columns: 2fr 3fr; }
+    #healthcare .feature-grid { grid-template-columns: 3fr 2fr; }
+    #voice .feature-grid { grid-template-columns: 2fr 3fr; }
+    #jobs .feature-grid { grid-template-columns: 3fr 2fr; }
+    #tourist .feature-grid { grid-template-columns: 2fr 3fr; }
+    #fitness .feature-grid { grid-template-columns: 2fr 3fr; }
+  }
+
+  @media (hover: none) {
+    .service-card:active { transform: scale(0.98); }
+    .btn:active, .btn-store:active { transform: scale(0.95); }
+  }
+
+  /* Hide floating icons on very small screens */
+  @media (max-width: 400px) {
+    .floating-icon-wrapper {
+      display: none !important;
+    }
+  }
+
+  </style>
+  </head>
+  <body>
+
+  <header>
+    <div class="header-wrap">
+      <div class="logo">
+        <a href="#hero" style="text-decoration: none; color: white;">
+          <span>MyLGU</span>
+        </a>
+      </div>
+
+      <!-- Hamburger Button -->
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav id="mobileNav">
+        <a href="#intro">About</a>
+        <a href="#features">Features</a>
+        <a href="#service">Services</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+<section class="reveal reveal-delay-1" id="hero" style="position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 112px 80px 48px; overflow: hidden; background-color: #0A192F;">
+
+  <!-- Background Layers -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(30, 64, 175, 0.35); z-index: 1;"></div>
+    
+    <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/6966663d4d514827eb703079.png" alt="Fire Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%) contrast(2) brightness(0.4) sepia(0.5) hue-rotate(-20deg); z-index: 2;"/>
+    
+    <!-- Fake News Layer -->
+    <div class="reveal reveal-delay-1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.12; display: flex; flex-wrap: wrap; gap: 16px; padding: 80px; align-content: flex-start; z-index: 3; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.05) 3px);">
+      <div style="width: 256px; height: 128px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px; position: relative; filter: grayscale(100%);">
+        <div style="height: 8px; width: 48px; background: rgba(255, 255, 255, 0.2); margin-bottom: 8px;"></div>
+        <div style="height: 4px; width: 100%; background: rgba(255, 255, 255, 0.1); margin-bottom: 4px;"></div>
+        <div style="height: 4px; width: 66%; background: rgba(255, 255, 255, 0.1);"></div>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); border: 3px solid #dc2626; color: #dc2626; padding: 2px 8px; font-weight: 900; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; opacity: 0.6;">UNVERIFIED</div>
+      </div>
+      <div style="width: 256px; height: 128px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 16px; position: relative; filter: grayscale(100%); transform: translate(48px, 32px);">
+        <div style="height: 8px; width: 64px; background: rgba(255, 255, 255, 0.2); margin-bottom: 8px;"></div>
+        <div style="height: 4px; width: 100%; background: rgba(255, 255, 255, 0.1);"></div>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); border: 3px solid #dc2626; color: #dc2626; padding: 2px 8px; font-weight: 900; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; opacity: 0.6;">MISINFORMATION</div>
+      </div>
+    </div>
+    
+    <!-- Executive Mesh -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4;">
+      <div style="position: absolute; top: 0; left: 0; width: 50%; height: 50%; background: radial-gradient(circle at 0% 0%, rgba(5, 13, 26, 0.8) 0%, transparent 100%);"></div>
+      <div style="position: absolute; top: 0; right: 0; width: 50%; height: 50%; background: radial-gradient(circle at 100% 0%, rgba(30, 58, 138, 0.3) 0%, transparent 100%);"></div>
+      <div style="position: absolute; bottom: 0; right: 0; width: 50%; height: 50%; background: radial-gradient(circle at 100% 100%, rgba(5, 13, 26, 0.8) 0%, transparent 100%);"></div>
+      <div style="position: absolute; bottom: 0; left: 0; width: 50%; height: 50%; background: radial-gradient(circle at 0% 100%, rgba(30, 58, 138, 0.3) 0%, transparent 100%);"></div>
+    </div>
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; background-size: 40px 40px; background-position: 0 0, 0 0; background-image: linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);"></div>
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCbLSUkJCDPtSQ1Vafy-ynks3ZIwSX9xlKWJaeLc_Pzb-dx0SaCc_vOjcTF7VHzCJl9_RGH6CzAr6lB_h3PQ8XmUXK7xMz6s7SK7WFGyoMChEtJxcsdsi5LDkyehBk8yZCvCJYYrxIU0XvnOoS2nxY85A0n-gnhTXZMnvYTexxOz1RCAcwgm08IipGSE2Kw0__tShi3-JGF-k17IhOx0I0TDuF14fUiyGTeAQ3lowUrR3MvFdLDQ7ZjSpZwGKQmD2P62V8Kh9IkUwLQ); opacity: 0.08; pointer-events: none; z-index: 6;"></div>
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, rgba(5, 13, 26, 0.95) 100%); pointer-events: none; z-index: 7;"></div>
+  </div>
+
+  <!-- Content Grid -->
+  <div style="max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; position: relative; z-index: 10;">
+    
+    <!-- Left Column -->
+    <div class="reveal reveal-delay-2" style="display: flex; flex-direction: column; gap: 32px;">
+      <div style="display: inline-block; border-left: 4px solid #dc2626; padding-left: 16px;">
+        <span class="reveal reveal-delay-2" style="color: #ef4444; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4em;">
+          Crisis Reality
+        </span>
+
+        <h1 class="reveal reveal-delay-3" style="
+          font-size: 60px;
+          font-weight: 900;
+          line-height: 0.9;
+          letter-spacing: -0.05em;
+          margin: 4px 0 0 0;
+          text-transform: uppercase;
+          font-style: italic;
+          color: #FFFFF0;
+        ">
+          STOP THE <br/>
+
+          <span class="reveal reveal-delay-3" style="
+            color: #dc2626;
+            text-shadow: 2px 2px 0 #7f1d1d, -1px -1px 0 rgba(255,255,255,0.1);
+            letter-spacing: -0.05em;
+          ">
+            STRUGGLE.
+          </span>
+          <br/>
+
+          <span class="reveal reveal-delay-3" style="
+            font-size: 60px;
+            color: #FFFFF0;
+            opacity: 1;
+          ">
+            START
+          </span>
+
+          <span class="reveal reveal-delay-4" style="
+            background: linear-gradient(135deg, #3B82F6 0%, #0052FF 50%, #1E3A8A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          ">
+            LEADING.
+          </span>
+        </h1>
+      </div>
+
+      <div class="reveal reveal-delay-4" style="position: relative; width: 100%; max-width: 448px;">
+        <div style="background: rgba(127, 29, 29, 0.9); padding: 24px; border-top: 2px solid #ef4444; border-bottom: 2px solid #ef4444; border-radius: 2px; box-shadow: 0 0 40px rgba(220, 38, 38, 0.2); position: relative; overflow: hidden; backdrop-filter: blur(4px);">
+          <div style="position: absolute; right: -8px; top: -8px; opacity: 0.1;">
+            <span class="material-symbols-outlined" style="font-size: 96px; color: #f87171; font-weight: 900;">gavel</span>
+          </div>
+          <h3 style="font-size: 18px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: -0.05em; margin: 0 0 16px 0; line-height: 1; position: relative; z-index: 10;">SAY GOODBYE TO THE CHAOS</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 10; margin: 0; padding: 0;">
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: white; font-weight: 900; text-transform: uppercase; letter-spacing: -0.025em;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #f87171; font-weight: 900;">local_fire_department</span>
+              <span>Slow crisis response</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: white; font-weight: 900; text-transform: uppercase; letter-spacing: -0.025em;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #f87171; font-weight: 900;">report_gmailerrorred</span>
+              <span>Fake news spreading</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: white; font-weight: 900; text-transform: uppercase; letter-spacing: -0.025em;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #f87171; font-weight: 900;">wifi_off</span>
+              <span>Broken communication lines</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: white; font-weight: 900; text-transform: uppercase; letter-spacing: -0.025em;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #f87171; font-weight: 900;">close</span>
+              <span>Disconnected leadership</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-4" style="display: flex; align-items: center; gap: 12px; color: rgba(255, 255, 240, 0.8); margin-top: 16px;">
+        <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; line-height: 1.4;">
+          Every minute of delay costs more than just money —
+          <span style="color: #f87171;">it costs lives</span>.
+        </span>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="reveal reveal-delay-4" style="position: relative; display: flex; justify-content: flex-end; align-items: center;">
+      <!-- WRAPPER -->
+      <div class="phone-wrap" style="position: relative;">
+        
+        <!-- iPhone -->
+        <div class="phone-hero" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.4s ease, box-shadow 0.4s ease; z-index: 30;">
+          <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+          <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+            <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247efc7683b699b510d09.jpg" alt="App Screenshot" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+          </div>
+        </div>
+
+        <!-- Problem Solved Badge -->
+        <div id="problem-solved" style="position: absolute; left: -260px; top: 40%; transform: translateY(-50%) rotate(-12deg); border: 10px double #3B82F6; background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(0, 82, 255, 0.95) 100%); box-shadow: 0 0 0 8px #0A192F, 0 0 100px rgba(59, 130, 246, 0.8); padding: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 300px; z-index: 40; transition: all 0.4s ease;">
+          <div style="color: white; font-weight: 900; font-size: 50px; font-style: italic; line-height: 0.85; letter-spacing: -0.05em; text-align: center; text-transform: uppercase;">PROBLEM<br/>SOLVED</div>
+          <div style="height: 4px; width: 100%; background: rgba(59, 130, 246, 0.6); margin: 12px 0;"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* VS Pulse Animation */
+@keyframes vsPulse {
+  0%, 100% {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 60px rgba(59, 130, 246, 0.6);
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* iPhone Hover Effect */
+.phone-hero:hover {
+  transform: scale(1.08) translateY(-8px);
+  box-shadow: 0 30px 80px rgba(59, 130, 246, 0.6);
+  z-index: 50 !important;
+}
+
+/* Problem Solved Badge - Default state (above phone) */
+#problem-solved {
+  pointer-events: none;
+}
+
+/* When phone is hovered, badge goes to back */
+.phone-hero:hover ~ #problem-solved {
+  z-index: 20 !important;
+  opacity: 0.3;
+}
+
+/* Tablet and below - 1024px */
+@media (max-width: 1024px) {
+  #hero {
+    padding: 100px 40px 40px !important;
+  }
+
+  /* Stack columns vertically */
+  #hero > div:nth-child(2) {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    justify-items: center;
+  }
+
+  /* Phone wrapper stays centered */
+  #hero > div:nth-child(2) > div:nth-child(2) {
+    display: flex !important;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Move "Problem Solved" below phone */
+  #problem-solved {
+    position: relative !important;
+    left: 0 !important;
+    top: -40px !important;
+    transform: rotate(-12deg) !important;
+    margin: 0 auto !important;
+    z-index: 40 !important;
+    min-width: 220px !important;
+    padding: 24px !important;
+  }
+
+  .phone-hero {
+    width: 220px !important;
+  }
+
+  #problem-solved > div:first-child {
+    font-size: 36px !important;
+  }
+}
+
+/* Mobile - 768px */
+@media (max-width: 768px) {
+  #hero {
+    padding: 100px 24px 32px !important;
+  }
+
+  .phone-hero {
+    width: 180px !important;
+  }
+
+  #problem-solved {
+    min-width: 180px !important;
+    padding: 16px !important;
+    top: -30px !important;
+  }
+
+  #problem-solved > div:first-child {
+    font-size: 28px !important;
+  }
+}
+
+/* Extra Small Mobile - 480px */
+@media (max-width: 480px) {
+  #hero {
+    padding: 100px 16px 24px !important;
+  }
+
+  .phone-hero {
+    width: 160px !important;
+  }
+
+  #problem-solved {
+    min-width: 160px !important;
+    padding: 12px !important;
+    top: -20px !important;
+    border-width: 6px !important;
+  }
+
+  #problem-solved > div:first-child {
+    font-size: 24px !important;
+  }
+}
+</style>
+
+  <!-- Intro Section -->
+  <section class="reveal reveal-delay-1" id="intro" style="padding: 80px 20px; background: #0A192F; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);"></div>
+    
+    <div class="reveal reveal-delay-2" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+      
+      <div class="badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); padding: 6px 14px; border-radius: 50px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; color: #3B82F6; margin: 0 auto 16px;">
+        <span class="material-symbols-outlined" style="font-size: 12px;">lightbulb</span>
+        WHAT IS MyLGU?
+      </div>
+      
+      <h2 class="reveal reveal-delay-3" style="font-size: clamp(28px, 4vw, 42px); font-weight: 900; margin: 0 0 16px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em;">
+        YOUR CITY. <span style="background: linear-gradient(135deg, #3B82F6 0%, #0052FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ONE TAP AWAY.</span>
+      </h2>
+      
+      
+      <p class="reveal reveal-delay-3" style="font-size: clamp(14px, 2vw, 16px); color: rgba(255, 255, 240, 0.6); max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">
+        Real governance meets real people. No lines. No delays. Just action.
+      </p>
+      
+      <div class="reveal reveal-delay-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        
+        <div class="card" style="background: rgba(30, 58, 138, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); transition: all 0.3s; position: relative; overflow: hidden; text-align: left;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #3B82F6, transparent); opacity: 0; transition: opacity 0.3s;"></div>
+          <div style="width: 32px; height: 3px; margin-bottom: 16px; background: linear-gradient(90deg, #3B82F6, #0052FF); border-radius: 2px;"></div>
+          <h4 style="font-size: 16px; font-weight: 900; margin: 0 0 8px 0; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em;">Unified Access</h4>
+          <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); line-height: 1.6; margin: 0;">Access everything with a single verified identity.</p>
+        </div>
+        
+        <div class="card" style="background: rgba(30, 58, 138, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); transition: all 0.3s; position: relative; overflow: hidden; text-align: left;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #3B82F6, transparent); opacity: 0; transition: opacity 0.3s;"></div>
+          <div style="width: 32px; height: 3px; margin-bottom: 16px; background: linear-gradient(90deg, #3B82F6, #0052FF); border-radius: 2px;"></div>
+          <h4 style="font-size: 16px; font-weight: 900; margin: 0 0 8px 0; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em;">Live Updates</h4>
+          <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); line-height: 1.6; margin: 0;">Real-time sync between city hall and your phone.</p>
+        </div>
+        
+        <div class="card" style="background: rgba(30, 58, 138, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); transition: all 0.3s; position: relative; overflow: hidden; text-align: left;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #3B82F6, transparent); opacity: 0; transition: opacity 0.3s;"></div>
+          <div style="width: 32px; height: 3px; margin-bottom: 16px; background: linear-gradient(90deg, #3B82F6, #0052FF); border-radius: 2px;"></div>
+          <h4 style="font-size: 16px; font-weight: 900; margin: 0 0 8px 0; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em;">Citizen First</h4>
+          <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); line-height: 1.6; margin: 0;">Built for everyone. No tech skills required.</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <style>
+  .badge {
+    animation: badgeGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes badgeGlow {
+    0%, 100% {
+      opacity: 0.7;
+      box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+    background: rgba(30, 58, 138, 0.15);
+  }
+
+  .card:hover > div:first-child {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    #intro {
+      padding: 60px 20px !important;
+    }
+  }
+  </style>
+
+
+  <!-- Features Section -->
+  <section class="reveal reveal-delay-1" id="features" style="padding: 100px 20px; background: linear-gradient(180deg, #0A192F 0%, #0D1F3C 100%); position: relative; overflow: hidden;">
+    
+    <!-- Animated Background Grid -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+    
+    <!-- Top Border -->
+    <div class="reveal reveal-delay-1" style="position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);"></div>
+    
+  
+    <div class="reveal reveal-delay-1" style="max-width: 1200px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+      
+      <!-- Badge with Pulse -->
+      <div class="badge reveal reveal-delay-2" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); padding: 6px 14px; border-radius: 50px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; color: #3B82F6; margin: 0 auto 16px;">
+        <span class="material-symbols-outlined" style="font-size: 12px; animation: rotate 3s linear infinite;">grid_view</span>
+        The executive evolution</div>
+      
+      
+      
+      <h2 class="reveal reveal-delay-2" style="font-size: clamp(28px, 4vw, 42px); font-weight: 900; margin: 0 0 16px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em;">
+        the solution: <span style="background: linear-gradient(135deg, #3B82F6 0%, #0052FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">the ultimate governance</span>
+      </h2>
+      
+      
+      <!-- Subheading -->
+      <p class="reveal reveal-delay-3" style="font-size: clamp(15px, 2.5vw, 18px); color: rgba(255, 255, 240, 0.7); max-width: 700px; margin: 0 auto 50px; line-height: 1.7; font-weight: 500;">
+        Where <span style="color: #3B82F6; font-weight: 700;">leadership meets innovation</span>. One platform to rule them all.
+      </p>
+      
+      <!-- Call to Action Line -->
+      <div class="reveal reveal-delay-4" style="margin-top: 0px; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+        <div style="width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5));"></div>
+        <p style="font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3em; color: rgba(59, 130, 246, 0.8); margin: 0;">Scroll to explore</p>
+        <div style="width: 60px; height: 1px; background: linear-gradient(90deg, rgba(59, 130, 246, 0.5), transparent);"></div>
+      </div>
+      
+      <!-- Animated Arrow -->
+      <div class="reveal reveal-delay-4" style="margin-top: 30px; animation: bounce 2s infinite;">
+        <span class="material-symbols-outlined" style="font-size: 32px; color: #3B82F6;">keyboard_arrow_down</span>
+      </div>
+      
+    </div>
+  </section>
+
+  <style>
+  /* Badge Glow */
+  .badge {
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 50px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.3);
+    }
+  }
+
+  /* Icon Rotation */
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Shimmer Effect */
+  @keyframes shimmer {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Grid Movement */
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  /* Bounce Arrow */
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #features {
+      padding: 70px 20px !important;
+    }
+  }
+  </style>
+
+
+  <!-- Emergency Response Section -->
+  <section class="reveal reveal-delay-1" id="emergency" style="padding: 100px 20px; background: linear-gradient(180deg, #0D1F3C 0%, #0A192F 100%); position: relative; overflow: hidden;">
+    
+    <!-- Animated Background Grid -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+
+
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        
+        <!-- Left Column - Content -->
+        <div class="reveal reveal-delay-2"> 
+              <!-- Icon & Label -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; background: rgba(220, 38, 38, 0.15); border: 1px solid rgba(220, 38, 38, 0.3); box-shadow: 0 0 30px rgba(220, 38, 38, 0.3); animation: iconPulse 2s ease-in-out infinite;">
+            <span class="material-symbols-outlined" style="color: #ef4444; font-size: 24px;">emergency</span>
+          </div>
+            
+            <span style="color: #ef4444; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px; display: block;">
+              Every Second Saves Lives
+            </span>
+          </div>
+          
+          <!-- Title -->
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(220, 38, 38, 0.3);">
+            Emergency Response
+          </h2>
+          
+          <!-- Description -->
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            When crisis hits, precision matters. MyLGU streamlines emergency reporting into a single direct line of communication, bypassing traditional delays.
+          </p>
+          
+          <!-- Comparison Cards with VS Badge -->
+          <div class="reveal reveal-delay-3" style="position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px;">
+        
+            
+            <!-- Before Card -->
+            <div class="compare-card" style="background: rgba(71, 85, 105, 0.15); border: 2px solid rgba(148, 163, 184, 0.3); padding: 24px; border-radius: 16px; position: relative; overflow: hidden; transition: all 0.3s;">
+              <!-- Animated Border Glow -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent); animation: borderGlow 2s ease-in-out infinite;"></div>
+              
+              <!-- Corner Label -->
+              <div style="position: absolute; top: 8px; left: 8px; background: rgba(148, 163, 184, 0.3); padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 900; color: rgba(255, 255, 240, 0.7); text-transform: uppercase; letter-spacing: 0.1em;">OLD WAY</div>
+              
+              <strong style="font-size: 12px; color: rgba(255, 255, 240, 0.6); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin: 20px 0 12px 0;">WITHOUT MyLGU</strong>
+              
+              <div style="height: 8px; background: rgba(226, 232, 240, 0.15); border-radius: 12px; margin: 12px 0; position: relative; overflow: hidden;">
+                <div style="height: 100%; background: linear-gradient(90deg, #94a3b8, #64748b); width: 90%; border-radius: 12px; animation: progressSlow 3s ease-in-out infinite;"></div>
+              </div>
+              
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); margin: 0; line-height: 1.6; font-weight: 500;">
+                Fragmented calls, manual triage, verbal descriptions without location.
+              </p>
+            </div>
+
+            <!-- VS Circle Badge -->
+            <div class="reveal reveal-delay-4" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; width: 50px; height: 50px; background: linear-gradient(135deg, #7f1d1d 0%, #0A192F 100%); border: 2px solid #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(220, 38, 38, 0.6); animation: vsPulse 2s ease-in-out infinite;">
+              <span style="font-size: 18px; font-weight: 900; font-style: italic; color: #ef4444;">VS</span>
+            </div>
+            
+            <!-- After Card -->
+            <div class="compare-card-active" style="background: rgba(127, 29, 29, 0.2); border: 2px solid rgba(239, 68, 68, 0.5); padding: 24px; border-radius: 16px; box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3), 0 0 0 1px rgba(239, 68, 68, 0.2); position: relative; overflow: hidden; transition: all 0.3s; animation: cardGlow 2s ease-in-out infinite;">
+              <!-- Animated Border Glow -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #ef4444, transparent); animation: borderGlowRed 2s ease-in-out infinite;"></div>
+              
+              <!-- Corner Label with Icon -->
+              <div style="position: absolute; top: 8px; left: 8px; background: rgba(220, 38, 38, 0.4); padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 900; color: #fecaca; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 4px;">
+                <span class="material-symbols-outlined" style="font-size: 10px;">bolt</span>
+                NEW WAY
+              </div>
+              
+              <strong style="font-size: 12px; color: #fecaca; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin: 20px 0 12px 0;">WITH MyLGU</strong>
+              
+              <div style="height: 8px; background: rgba(254, 242, 242, 0.15); border-radius: 12px; margin: 12px 0; position: relative; overflow: hidden;">
+                <div style="height: 100%; background: linear-gradient(90deg, #ef4444, #dc2626); width: 15%; border-radius: 12px; box-shadow: 0 0 10px rgba(239, 68, 68, 0.6); animation: progressFast 1.5s ease-in-out infinite;"></div>
+              </div>
+            
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.95); font-weight: 700; margin: 0; line-height: 1.6;">
+                One-tap SOS, AI-assisted triage, and instant GPS location sharing.
+              </p>
+            </div>
+            
+          </div>
+          
+          <!-- Checklist -->
+          <ul class="reveal reveal-delay-4" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px;">
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #ef4444; font-size: 20px;">check_circle</span>
+              Automated responder prioritization
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #ef4444; font-size: 20px;">check_circle</span>
+              Hyper-accurate satellite geolocation
+            </li>
+          </ul>
+          
+        </div>
+        
+        <!-- Right Column - Phone -->
+        <div class="reveal reveal-delay-3" class="phone-column" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          
+          <!-- Phone Mockup -->
+          <div class="phone-emergencyy" style="position: relative; width: 240px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+
+            <!-- Notch -->
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            
+            <!-- Screen -->
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden; position: relative;">
+              <img
+                src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247eff8a93b8251736d54.jpg"
+                alt="Emergency App Screen"
+                style="width: 100%; height: 100%; object-fit: cover; display: block;"
+              />
+            </div>
+          </div>
+          
+          <!-- Caption -->
+          <div class="reveal reveal-delay-4" style="position: absolute; top: 48px; right: 70px; background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(220, 38, 38, 0.3); max-width: 200px; z-index: 20;">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #ef4444;">Live Safety</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">AI Triage active: Dispatching Unit #42</p>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <style>
+  /* Icon Pulse Animation */
+  @keyframes iconPulse {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 50px rgba(220, 38, 38, 0.6), 0 0 80px rgba(220, 38, 38, 0.3);
+    }
+  }
+
+  /* VS Badge Pulse */
+  @keyframes vsPulse {
+    0%, 100% {
+      box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(220, 38, 38, 0.4);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 4px #0A192F, 0 8px 32px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.4);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+
+  /* Card Glow for After Card */
+  @keyframes cardGlow {
+    0%, 100% {
+      box-shadow: 0 8px 32px rgba(220, 38, 38, 0.2), 0 0 0 1px rgba(239, 68, 68, 0.2);
+    }
+    50% {
+      box-shadow: 0 8px 40px rgba(220, 38, 38, 0.4), 0 0 0 1px rgba(239, 68, 68, 0.4), 0 0 60px rgba(220, 38, 38, 0.2);
+    }
+  }
+
+  /* Border Glow Animations */
+  @keyframes borderGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes borderGlowRed {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Progress Bar Animations */
+  @keyframes progressSlow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes progressFast {
+    0%, 100% { 
+      opacity: 0.8;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+    }
+    50% { 
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    }
+  }
+
+  /* Grid Movement */
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  /* Phone Hover Effect */
+  .phone-emergencyy:hover {
+    transform: scale(1.08) translateY(-8px);
+    box-shadow: 0 30px 80px rgba(220, 38, 38, 0.4), 0 0 40px rgba(220, 38, 38, 0.2);
+    z-index: 22;
+  }
+
+  /* Card Hover Effects */
+  .compare-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(148, 163, 184, 0.5);
+  }
+
+  .compare-card-active:hover {
+    transform: translateY(-4px);
+    border-color: rgba(239, 68, 68, 0.7);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #emergency {
+      padding: 80px 20px !important;
+    }
+    
+    #emergency > div > div {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    
+    #emergency > div > div > div:first-child > div:nth-child(4) {
+      grid-template-columns: 1fr !important;
+      gap: 30px !important;
+    }
+    
+    #emergency > div > div > div:first-child > div:nth-child(4) > div:first-child {
+      left: 50% !important;
+      top: -24px !important;
+      transform: translateX(-50%) !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      top: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    #emergency > div > div > div:first-child > div:nth-child(4) {
+      grid-template-columns: 1fr !important;
+    }
+  }
+  </style>
+
+  <!-- News & Events Section -->
+  <section class="reveal reveal-delay-1" id="news" style="padding: 100px 20px; background: linear-gradient(180deg, #0A192F 0%, #0D1F3C 100%); position: relative; overflow: hidden;">
+    
+    <!-- Animated Background Grid -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+    
+    <!-- Glowing Orbs -->
+    <div style="position: absolute; top: -100px; left: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent); border-radius: 50%; filter: blur(60px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      
+      <div class="reveal reveal-delay-1" id="news-grid" style="display: grid; grid-template-columns: 2fr 3fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: DUAL PHONES -->
+        <div class="reveal reveal-delay-2" id="news-phones" style="position: relative; height: 500px;">
+          
+          <!-- LEFT PHONE -->
+          <div id="news-phone-left" style="position: absolute; left: -20px; top: 50%; transform: translateY(-60%) scale(0.95); z-index: 2;">
+            <div style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3); border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+              
+              <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+              
+              <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+                <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247eff13bc31b9d472926.jpg" alt="News Screen" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+              </div>
+            </div>
+            
+            <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 4px 12px; border-radius: 20px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); border: 1px solid rgba(59, 130, 246, 0.4); white-space: nowrap;">
+              <p style="font-size: 11px; font-weight: 700; color: #3b82f6; margin: 0; text-align: center;">News</p>
+            </div>
+          </div>
+          
+          <!-- RIGHT PHONE -->
+          <div id="news-phone-right" style="position: absolute; right: -20px; top: 50%; transform: translateY(-40%) scale(0.95); z-index: 1; opacity: 0.9;">
+            <div style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; box-shadow: 0 20px 60px rgba(71, 85, 105, 0.3); border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+              
+              <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+              
+              <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+                <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247f0e1863828ca7c9b17.jpg" alt="Events Screen" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+              </div>
+            </div>
+            
+            <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 4px 12px; border-radius: 20px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); border: 1px solid rgba(148, 163, 184, 0.3); white-space: nowrap;">
+              <p style="font-size: 11px; font-weight: 700; color: rgba(255, 255, 240, 0.7); margin: 0; text-align: center;">Events</p>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- RIGHT: CONTENT -->
+        <div id="news-content">
+          
+          <!-- Icon & Label -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); animation: iconPulseBlue 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #3b82f6; font-size: 24px;">calendar_month</span>
+            </div>
+            
+            <span style="color: #3b82f6; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              Every Program Within Reach
+            </span>
+          </div>
+          
+          <!-- Title -->
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);">
+            News & Events
+          </h2>
+          
+          <!-- Description -->
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            Stay synchronized with your community through localized calendars and instant official updates. No more guessing when the next program happens.
+          </p>
+          
+          <!-- Comparison Card -->
+          <div class="reveal reveal-delay-3" style="background: rgba(30, 58, 138, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 16px; padding: 24px; margin-bottom: 24px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent); animation: borderGlow 2s ease-in-out infinite;"></div>
+            
+            <p style="color: #3b82f6; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; margin: 0 0 20px 0;">
+              Stay Informed, Stay Updated
+            </p>
+            
+            <div class="reveal reveal-delay-3" style="position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              
+              
+              <!-- Before -->
+              <div class="compare-card-before" style="padding: 16px; background: rgba(71, 85, 105, 0.15); border: 2px solid rgba(148, 163, 184, 0.3); border-radius: 12px; position: relative; overflow: hidden; transition: all 0.3s;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent); animation: borderGlow 2s ease-in-out infinite;"></div>
+                
+                <!-- Corner Label -->
+                <div style="position: absolute; top: 6px; left: 6px; background: rgba(148, 163, 184, 0.3); padding: 3px 6px; border-radius: 4px; font-size: 8px; font-weight: 900; color: rgba(255, 255, 240, 0.7); text-transform: uppercase; letter-spacing: 0.1em;">OLD WAY</div>
+                
+                <span style="font-size: 10px; font-weight: 900; color: rgba(255, 255, 240, 0.5); text-transform: uppercase; display: block; margin: 16px 0 8px 0; letter-spacing: 0.1em;">
+                  WITHOUT MyLGU
+                </span>
+                
+                <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); font-weight: 600; line-height: 1.5; margin: 0;">
+                  Reliance on faded tarpaulins and neighborhood rumors.
+                </p>
+              </div>
+              
+              <!-- VS Circle Badge -->
+              <div class="reveal reveal-delay-4" style="position: absolute; left: 45%; top: 50%; transform: translate(-50%, -50%); z-index: 10; width: 50px; height: 50px; background: linear-gradient(135deg, #1e3a8a 0%, #0A192F 100%); border: 2px solid #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(59, 130, 246, 0.6); animation: vsPulseBlue 2s ease-in-out infinite;">
+                <span style="font-size: 14px; font-weight: 900; font-style: italic; color: #3b82f6;">VS</span>
+              </div>
+              
+              <!-- After -->
+              <div class="compare-card-after" style="padding: 16px; background: rgba(30, 58, 138, 0.2); border: 2px solid rgba(59, 130, 246, 0.5); border-radius: 12px; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.2); position: relative; overflow: hidden; transition: all 0.3s; animation: cardGlowBlue 2s ease-in-out infinite;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); animation: borderGlowBlue 2s ease-in-out infinite;"></div>
+                
+                <!-- Corner Label with Icon -->
+                <div style="position: absolute; top: 6px; left: 6px; background: rgba(59, 130, 246, 0.4); padding: 3px 6px; border-radius: 4px; font-size: 8px; font-weight: 900; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 3px;">
+                  <span class="material-symbols-outlined" style="font-size: 9px;">bolt</span>
+                  NEW WAY
+                </div>
+                
+                <span style="font-size: 10px; font-weight: 900; color: #3b82f6; text-transform: uppercase; display: block; margin: 16px 0 8px 0; letter-spacing: 0.1em;">
+                  WITH MyLGU
+                </span>
+                
+                <p style="font-size: 13px; color: rgba(255, 255, 240, 0.95); font-weight: 700; line-height: 1.5; margin: 0;">
+                  Verified Announcement Board for real-time, official city-wide updates.
+                </p>
+              </div>
+              
+            </div>
+          </div>
+          
+          <!-- Feature Grid -->
+          <div class="reveal reveal-delay-4" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            
+            <div style="display: flex; align-items: flex-start; gap: 10px; background: rgba(30, 58, 138, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.15); transition: all 0.3s;">
+              <span class="material-symbols-outlined" style="color:#3b82f6;font-size:20px;margin-top:2px;flex-shrink:0;">account_balance</span>
+              <div>
+                <p style="font-size:13px;font-weight:700;color:rgba(255, 255, 240, 0.95);margin:0;">Municipal Events</p>
+                <p style="font-size:11px;color:rgba(255, 255, 240, 0.6);margin:4px 0 0;">City-wide programs</p>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: flex-start; gap: 10px; background: rgba(30, 58, 138, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.15); transition: all 0.3s;">
+              <span class="material-symbols-outlined" style="color:#3b82f6;font-size:20px;margin-top:2px;flex-shrink:0;">meeting_room</span>
+              <div>
+                <p style="font-size:13px;font-weight:700;color:rgba(255, 255, 240, 0.95);margin:0;">Barangay Events</p>
+                <p style="font-size:11px;color:rgba(255, 255, 240, 0.6);margin:4px 0 0;">Hyper-local initiatives</p>
+              </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <style>
+  /* Icon Pulse */
+  @keyframes iconPulseBlue {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 50px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.3);
+    }
+  }
+
+  /* VS Badge Pulse Blue */
+  @keyframes vsPulseBlue {
+    0%, 100% {
+      box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(59, 130, 246, 0.4);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 4px #0A192F, 0 8px 32px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+
+  /* Card Glow for After Card Blue */
+  @keyframes cardGlowBlue {
+    0%, 100% {
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.2);
+    }
+    50% {
+      box-shadow: 0 8px 40px rgba(59, 130, 246, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  /* Border Glow Animations */
+  @keyframes borderGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes borderGlowBlue {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Grid Movement */
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  /* Phone Hover Effects */
+  #news-phone-left > div:hover,
+  #news-phone-right > div:hover {
+    transform: scale(1.05) translateY(-8px);
+    box-shadow: 0 30px 80px rgba(59, 130, 246, 0.4);
+  }
+
+  /* Card Hover Effects */
+  .compare-card-before:hover {
+    transform: translateY(-4px);
+    border-color: rgba(148, 163, 184, 0.5);
+  }
+
+  .compare-card-after:hover {
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, 0.7);
+  }
+
+  /* Responsive Styles */
+
+  /* Mobile Small (320px - 479px) */
+  @media (max-width: 479px) {
+    #news {
+      padding: 80px 20px !important;
+    }
+
+    #news-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Move phones below content */
+    #news-content {
+      order: 1;
+    }
+    
+    #news-phones {
+      order: 2;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 30px !important;
+      padding: 20px 0 !important;
+      margin-top: 20px;
+    }
+    
+    #news-phone-left,
+    #news-phone-right {
+      position: relative !important;
+      left: auto !important;
+      right: auto !important;
+      top: auto !important;
+      transform: none !important;
+      opacity: 1 !important;
+      margin: 0 !important;
+    }
+    
+    #news-phone-left > div,
+    #news-phone-right > div {
+      width: 180px !important;
+    }
+    
+    #news-content > div:nth-child(4) > div,
+    #news-content > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #news-content > div:nth-child(4) > div > div:first-child {
+      left: 50% !important;
+      top: -20px !important;
+      transform: translateX(-50%) !important;
+    }
+  }
+
+  /* Mobile Medium (480px - 639px) */
+  @media (min-width: 480px) and (max-width: 639px) {
+    #news {
+      padding: 80px 20px !important;
+    }
+
+    #news-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Move phones below content */
+    #news-content {
+      order: 1;
+    }
+    
+    #news-phones {
+      order: 2;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 35px !important;
+      padding: 20px 0 !important;
+      margin-top: 20px;
+    }
+    
+    #news-phone-left,
+    #news-phone-right {
+      position: relative !important;
+      left: auto !important;
+      right: auto !important;
+      top: auto !important;
+      transform: none !important;
+      opacity: 1 !important;
+      margin: 0 !important;
+    }
+    
+    #news-phone-left > div,
+    #news-phone-right > div {
+      width: 200px !important;
+    }
+    
+    #news-content > div:nth-child(4) > div,
+    #news-content > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #news-content > div:nth-child(4) > div > div:first-child {
+      left: 50% !important;
+      top: -20px !important;
+      transform: translateX(-50%) !important;
+    }
+  }
+
+  /* Tablet (640px - 767px) */
+  @media (min-width: 640px) and (max-width: 767px) {
+    #news-grid {
+      grid-template-columns: 1fr !important;
+      gap: 50px !important;
+    }
+    
+    #news-phones {
+      height: 400px !important;
+      position: relative !important;
+    }
+    
+    #news-phone-left {
+      position: absolute !important;
+      left: 10% !important;
+      top: 50% !important;
+      transform: translateY(-55%) !important;
+      z-index: 2 !important;
+    }
+    
+    #news-phone-right {
+      position: absolute !important;
+      right: 10% !important;
+      top: 50% !important;
+      transform: translateY(-45%) !important;
+      z-index: 1 !important;
+    }
+    
+    #news-phone-left > div,
+    #news-phone-right > div {
+      width: 200px !important;
+    }
+    
+    #news-content > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* Tablet Large (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    #news-grid {
+      grid-template-columns: 2fr 3fr !important;
+      gap: 40px !important;
+    }
+    
+    #news-phones {
+      height: 450px !important;
+      position: relative !important;
+    }
+    
+    #news-phone-left {
+      position: absolute !important;
+      left: 0 !important;
+      top: 50% !important;
+      transform: translateY(-58%) !important;
+      z-index: 2 !important;
+    }
+    
+    #news-phone-right {
+      position: absolute !important;
+      right: 0 !important;
+      top: 50% !important;
+      transform: translateY(-42%) !important;
+      z-index: 1 !important;
+    }
+    
+    #news-phone-left > div,
+    #news-phone-right > div {
+      width: 220px !important;
+    }
+  }
+
+  /* Desktop (1024px - 1279px) */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    #news-grid {
+      grid-template-columns: 2fr 3fr !important;
+      gap: 50px !important;
+    }
+    
+    #news-phones {
+      height: 500px !important;
+      position: relative !important;
+    }
+    
+    #news-phone-left {
+      position: absolute !important;
+      left: -10px !important;
+      top: 50% !important;
+      transform: translateY(-60%) scale(0.92) !important;
+      z-index: 2 !important;
+    }
+    
+    #news-phone-right {
+      position: absolute !important;
+      right: -10px !important;
+      top: 50% !important;
+      transform: translateY(-40%) scale(0.92) !important;
+      z-index: 1 !important;
+    }
+  }
+
+  /* Desktop Large (1280px+) */
+  @media (min-width: 1280px) {
+    #news-grid {
+      grid-template-columns: 2fr 3fr !important;
+      gap: 60px !important;
+    }
+    
+    #news-phones {
+      height: 500px !important;
+      position: relative !important;
+    }
+    
+    #news-phone-left {
+      position: absolute !important;
+      left: -20px !important;
+      top: 50% !important;
+      transform: translateY(-60%) scale(0.95) !important;
+      z-index: 2 !important;
+    }
+    
+    #news-phone-right {
+      position: absolute !important;
+      right: -20px !important;
+      top: 50% !important;
+      transform: translateY(-40%) scale(0.95) !important;
+      z-index: 1 !important;
+    }
+  }
+  </style>
+
+
+  <!-- Community Section -->
+  <section class="reveal reveal-delay-1" id="community" style="padding: 100px 20px; background: linear-gradient(180deg, #0D1F3C 0%, #0A192F 100%); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(34, 197, 94, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 197, 94, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <div style="position: absolute; bottom: -150px; right: -150px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(34, 197, 94, 0.1), transparent); border-radius: 50%; filter: blur(80px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div id="community-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: Content -->
+        <div id="community-content">
+          <!-- Icon & Label -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); box-shadow: 0 0 30px rgba(34, 197, 94, 0.3); animation: iconPulseGreen 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #22c55e; font-size: 24px;">diversity_3</span>
+            </div>
+            
+            <span style="color: #22c55e; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              Connecting communities, one story at a time
+            </span>
+          </div>
+          
+          <h2  class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(34, 197, 94, 0.3);">
+            Community & Growth
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            A digital plaza for sharing updates, photos, and engaging with neighbors. Strengthen local ties and the economy with verified hubs.
+          </p>
+          
+          <!-- Comparison with VS Badge -->
+          <div  class="reveal reveal-delay-3" style="position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px;">
+            
+            <div class="compare-card-gray" style="padding: 20px; background: rgba(71, 85, 105, 0.15); border: 2px solid rgba(148, 163, 184, 0.3); border-radius: 12px; position: relative; overflow: hidden; transition: all 0.3s;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent); animation: borderGlow 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 6px; left: 6px; background: rgba(148, 163, 184, 0.3); padding: 3px 6px; border-radius: 4px; font-size: 8px; font-weight: 900; color: rgba(255, 255, 240, 0.7); text-transform: uppercase; letter-spacing: 0.1em;">OLD WAY</div>
+              
+              <strong style="font-size: 11px; color: rgba(255, 255, 240, 0.5); text-transform: uppercase; display: block; margin: 16px 0 12px 0; letter-spacing: 0.1em;">WITHOUT MyLGU</strong>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); font-weight: 600; margin: 0; line-height: 1.6;">
+                Unreliable Facebook groups and cluttered text chains.
+              </p>
+            </div>
+
+            <!-- VS Circle Badge -->
+            <div class="reveal reveal-delay-4" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; width: 50px; height: 50px; background: linear-gradient(135deg, #166534 0%, #0A192F 100%); border: 2px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(34, 197, 94, 0.6); animation: vsPulseGreen 2s ease-in-out infinite;">
+              <span style="font-size: 14px; font-weight: 900; font-style: italic; color: #22c55e;">VS</span>
+            </div>
+
+            <div class="compare-card-active-green" style="padding: 20px; background: rgba(34, 197, 94, 0.2); border: 2px solid rgba(34, 197, 94, 0.5); border-radius: 12px; box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3), 0 0 0 1px rgba(34, 197, 94, 0.2); position: relative; overflow: hidden; transition: all 0.3s; animation: cardGlowGreen 2s ease-in-out infinite;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #22c55e, transparent); animation: borderGlowActive 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 6px; left: 6px; background: rgba(34, 197, 94, 0.4); padding: 3px 6px; border-radius: 4px; font-size: 8px; font-weight: 900; color: #86efac; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 3px;">
+                <span class="material-symbols-outlined" style="font-size: 9px;">bolt</span>
+                NEW WAY
+              </div>
+              
+              <strong style="font-size: 11px; color: #4ade80; text-transform: uppercase; display: block; margin: 16px 0 12px 0; letter-spacing: 0.1em;">WITH MyLGU</strong>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.95); font-weight: 700; margin: 0; line-height: 1.6;">
+                Moderated Community Feed as a digital bulletin board.
+              </p>
+            </div>
+          </div>
+          
+          <ul class="reveal reveal-delay-4" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px;">
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #22c55e; font-size: 20px;">check_circle</span>
+              Local merchant directories
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #22c55e; font-size: 20px;">check_circle</span>
+              Verified resident forums
+            </li>
+          </ul>
+        </div>
+        
+        <!-- RIGHT: Phone -->
+        <div class="reveal reveal-delay-3" id="community-phone" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="phone-community" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+              <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247efc7683b013d510d0a.jpg" alt="Community Feed" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+            </div>
+          </div>
+          
+          <div class="caption reveal reveal-delay-4" style="position: absolute; top: 40px; right: 70px; background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(34, 197, 94, 0.3); max-width: 200px; z-index: 20;">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #22c55e;">Verified</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">Citizen badge authenticated.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <style>
+  /* Animations */
+  @keyframes iconPulseGreen {
+    0%, 100% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.3); }
+    50% { box-shadow: 0 0 50px rgba(34, 197, 94, 0.6), 0 0 80px rgba(34, 197, 94, 0.3); }
+  }
+
+  @keyframes vsPulseGreen {
+    0%, 100% {
+      box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(34, 197, 94, 0.4);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 4px #0A192F, 0 8px 32px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.4);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+
+  @keyframes cardGlowGreen {
+    0%, 100% { 
+      box-shadow: 0 8px 32px rgba(34, 197, 94, 0.2), 0 0 0 1px rgba(34, 197, 94, 0.2); 
+    }
+    50% { 
+      box-shadow: 0 8px 40px rgba(34, 197, 94, 0.4), 0 0 0 1px rgba(34, 197, 94, 0.4), 0 0 60px rgba(34, 197, 94, 0.2); 
+    }
+  }
+
+  @keyframes borderGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes borderGlowActive {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  .phone-community:hover {
+    transform: scale(1.08) translateY(-8px);
+    box-shadow: 0 30px 80px rgba(34, 197, 94, 0.4);
+    z-index: 22;
+  }
+
+  .compare-card-gray:hover {
+    transform: translateY(-4px);
+    border-color: rgba(148, 163, 184, 0.5);
+  }
+
+  .compare-card-active-green:hover {
+    transform: translateY(-4px);
+    border-color: rgba(34, 197, 94, 0.7);
+  }
+
+  /* Responsive Styles */
+
+  /* Mobile Small (320px - 479px) */
+  @media (max-width: 479px) {
+    #community {
+      padding: 80px 20px !important;
+    }
+
+    #community-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Move phone below content */
+    #community-content {
+      order: 1;
+    }
+    
+    #community-phone {
+      order: 2;
+      margin-top: 20px;
+    }
+    
+    #community-phone .phone-community {
+      width: 200px !important;
+    }
+    
+    #community-content > div:nth-child(4) {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #community-content > div:nth-child(4) > div:first-child {
+      left: 50% !important;
+      top: -20px !important;
+      transform: translateX(-50%) !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      top: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+    }
+  }
+
+  /* Mobile Medium (480px - 639px) */
+  @media (min-width: 480px) and (max-width: 639px) {
+    #community {
+      padding: 80px 20px !important;
+    }
+
+    #community-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Move phone below content */
+    #community-content {
+      order: 1;
+    }
+    
+    #community-phone {
+      order: 2;
+      margin-top: 20px;
+    }
+    
+    #community-phone .phone-community {
+      width: 220px !important;
+    }
+    
+    #community-content > div:nth-child(4) {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #community-content > div:nth-child(4) > div:first-child {
+      left: 50% !important;
+      top: -20px !important;
+      transform: translateX(-50%) !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      top: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+    }
+  }
+
+  /* Tablet (640px - 767px) */
+  @media (min-width: 640px) and (max-width: 767px) {
+    #community {
+      padding: 80px 20px !important;
+    }
+
+    #community-grid {
+      grid-template-columns: 1fr !important;
+      gap: 50px !important;
+    }
+    
+    #community-phone .phone-community {
+      width: 230px !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      top: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+    }
+  }
+
+  /* Tablet Large (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    #community-grid {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 40px !important;
+    }
+    
+    #community-phone .phone-community {
+      width: 240px !important;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #community-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+    
+    #community-phone .phone-community {
+      max-width: 250px;
+    }
+  }
+  </style>
+
+
+
+
+  <!-- Government Services Section -->
+  <section class="reveal reveal-delay-1" id="gov-services" style="padding: 100px 20px; background: linear-gradient(180deg, #0A192F 0%, #0D1F3C 100%); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(245, 158, 11, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 158, 11, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <div style="position: absolute; top: -100px; left: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(245, 158, 11, 0.12), transparent); border-radius: 50%; filter: blur(60px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div id="gov-services-grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: Phone -->
+        <div class="reveal reveal-delay-2" id="gov-services-phone" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="phone" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 30px 80px rgba(245, 158, 11, 0.4); ">
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+              <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247eff8a93b6318736d56.jpg" alt="Government Services" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+            </div>
+          </div>
+          
+          <div class="caption reveal reveal-delay-3" style="position: absolute; top: 30px; left: -30px; background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.3); max-width: 200px; z-index: 20;">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #f59e0b;">Government Hub</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">SSS Filing: Status Approved</p>
+          </div>
+        </div>
+        
+        <!-- RIGHT: Content -->
+        <div id="gov-services-content">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 30px rgba(245, 158, 11, 0.3); animation: iconPulseYellow 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #f59e0b; font-size: 24px;">account_balance</span>
+            </div>
+            
+            <span style="color: #f59e0b; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              One App for Every Service
+            </span>
+          </div>
+          
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(245, 158, 11, 0.3);">
+            Government Services
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            Ditch the lines and paperwork. Access national and local government agency services directly from your smartphone with automated tracking.
+          </p>
+          
+      <!-- Comparison Cards with VS Badge -->
+          <div class="reveal reveal-delay-3" style="position: relative; display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px;">
+            
+            <!-- Before Card -->
+            <div class="compare-card-before" style="padding: 20px; background: rgba(71, 85, 105, 0.15); border: 2px solid rgba(148, 163, 184, 0.3); border-radius: 12px; position: relative; overflow: hidden; transition: all 0.3s;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent); animation: borderGlow 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 8px; left: 8px; background: rgba(148, 163, 184, 0.3); padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 900; color: rgba(255, 255, 240, 0.7); text-transform: uppercase; letter-spacing: 0.1em;">OLD WAY</div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 12px 0;">
+                <span style="font-size: 11px; font-weight: 900; color: rgba(255, 255, 240, 0.5); text-transform: uppercase; letter-spacing: 0.1em;">WITHOUT MyLGU</span>
+                <span style="font-size: 12px; font-weight: 700; color: rgba(255, 255, 240, 0.6); display: flex; align-items: center; gap: 4px;">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">hourglass_empty</span> Hours Spent
+                </span>
+              </div>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); font-weight: 600; line-height: 1.7; margin: 0;">
+                Endless lining up at SSS, Pag-IBIG, BIR, LTO, and LGU offices for simple filings and documents.
+              </p>
+            </div>
+
+            <!-- VS Circle Badge -->
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; width: 50px; height: 50px; background: linear-gradient(135deg, #78350f 0%, #0A192F 100%); border: 2px solid #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(245, 158, 11, 0.6); animation: vsPulseAmber 2s ease-in-out infinite;">
+              <span style="font-size: 18px; font-weight: 900; font-style: italic; color: #f59e0b;">VS</span>
+            </div>
+            
+            <!-- After Card -->
+            <div class="compare-card-after" style="padding: 20px; background: rgba(120, 53, 15, 0.2); border: 2px solid rgba(245, 158, 11, 0.5); border-radius: 12px; box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3), 0 0 0 1px rgba(245, 158, 11, 0.2); position: relative; overflow: hidden; transition: all 0.3s; animation: cardGlowAmber 2s ease-in-out infinite;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #f59e0b, transparent); animation: borderGlowActive 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 8px; left: 8px; background: rgba(245, 158, 11, 0.4); padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 900; color: #fde68a; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 4px;">
+                <span class="material-symbols-outlined" style="font-size: 10px;">bolt</span>
+                NEW WAY
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 12px 0;">
+                <span style="font-size: 11px; font-weight: 900; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.1em;">WITH MyLGU</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 4px;">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">done_all</span> Minutes
+                </span>
+              </div>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.95); font-weight: 700; line-height: 1.7; margin: 0;">
+                All forms accessible online with automated appointment booking and real-time progress tracking.
+              </p>
+            </div>
+          </div>
+          
+          <div class="reveal reveal-delay-4" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #f59e0b; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Multi-agency integration</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #f59e0b; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Unified payment gateway</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #f59e0b; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Digital document storage</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #f59e0b; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Auto-fill verified info</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <style>
+  @keyframes iconPulseYellow {
+    0%, 100% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.3); }
+    50% { box-shadow: 0 0 50px rgba(245, 158, 11, 0.6), 0 0 80px rgba(245, 158, 11, 0.3); }
+  }
+
+  @keyframes cardGlowAmber {
+    0%, 100% { box-shadow: 0 8px 32px rgba(245, 158, 11, 0.2); }
+    50% { box-shadow: 0 8px 40px rgba(245, 158, 11, 0.4), 0 0 60px rgba(245, 158, 11, 0.2); }
+  }
+
+  @keyframes borderGlowActive {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  .phone-gov:hover {
+    transform: scale(1.08) translateY(-8px);
+    box-shadow: 0 30px 80px rgba(245, 158, 11, 0.4);
+    z-index: 22
+  }
+
+  /* Responsive */
+
+  /* Mobile Small (320px - 479px) */
+  @media (max-width: 479px) {
+    #gov-services {
+      padding: 80px 20px !important;
+    }
+    
+    #gov-services-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Move phone below content */
+    #gov-services-content {
+      order: 1;
+    }
+    
+    #gov-services-phone {
+      order: 2;
+      margin-top: 20px;
+    }
+    
+    #gov-services-phone .phone-gov {
+      width: 200px !important;
+    }
+    
+    #gov-services-content > div:nth-child(3) {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #gov-services-content > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+      z-index: 20;
+    }
+  }
+
+  /* Mobile Medium (480px - 639px) */
+  @media (min-width: 480px) and (max-width: 639px) {
+    #gov-services {
+      padding: 80px 20px !important;
+    }
+    
+    #gov-services-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Move phone below content */
+    #gov-services-content {
+      order: 1;
+    }
+    
+    #gov-services-phone {
+      order: 2;
+      margin-top: 20px;
+    }
+    
+    #gov-services-phone .phone-gov {
+      width: 220px !important;
+    }
+    
+    #gov-services-content > div:nth-child(3) {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #gov-services-content > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+      z-index: 20;
+    }
+  }
+
+  /* Tablet (640px - 767px) */
+  @media (min-width: 640px) and (max-width: 767px) {
+    #gov-services {
+      padding: 80px 20px !important;
+    }
+    
+    #gov-services-grid {
+      grid-template-columns: 1fr !important;
+      gap: 50px !important;
+    }
+    
+    #gov-services-phone .phone-gov {
+      width: 230px !important;
+    }
+    
+    #gov-services-content > div:nth-child(3) {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #gov-services-content > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+      z-index: 20;
+    }
+  }
+
+  /* Tablet Large (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    #gov-services-grid {
+      grid-template-columns: 1fr 2fr !important;
+      gap: 40px !important;
+    }
+    
+    #gov-services-phone .phone-gov {
+      width: 240px !important;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #gov-services-grid {
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+    }
+    
+    #gov-services-phone .phone-gov {
+      max-width: 250px;
+    }
+  }
+  </style>
+
+  <!-- Transparency Section -->
+  <section class="reveal reveal-delay-1" id="transparency" style="padding: 100px 20px; background: linear-gradient(180deg, #0D1F3C 0%, #0A192F 100%); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(147, 197, 253, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(147, 197, 253, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(147, 197, 253, 0.15), transparent); border-radius: 50%; filter: blur(80px);"></div>
+    
+    <div style="position: absolute; bottom: -100px; left: -100px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent); border-radius: 50%; filter: blur(70px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: Content -->
+        <div>
+          <!-- Icon & Label -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); animation: iconPulseBlue 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #60a5fa; font-size: 24px;">account_balance</span>
+            </div>
+            
+            <span style="color: #60a5fa; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              Open Data. Accountable Leadership.
+            </span>
+          </div>
+          
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; background: linear-gradient(135deg, #ffffff 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);">
+            Transparent Governance
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.8); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.75; font-weight: 500;">
+            Access the digital transparency portal for city ordinances and procurement records. Leadership that stays accountable.
+          </p>
+          
+          <!-- Feature Cards -->
+          <div class="reveal reveal-delay-3" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            
+            <div class="feature-card-transparency" style="background: linear-gradient(180deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.02)); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 24px; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: pointer;">
+              <div class="card-glow-top" style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #60a5fa, transparent); opacity: 0; transition: opacity 0.4s; animation: borderGlow 3s ease-in-out infinite;"></div>
+              
+              <div style="width: 52px; height: 52px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; transition: all 0.4s ease; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);">
+                <span class="material-symbols-outlined" style="font-size: 24px;">gavel</span>
+              </div>
+              <h4 style="font-size: 17px; font-weight: 900; color: rgba(255, 255, 240, 0.95); margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: -0.02em; transition: color 0.3s;">Live Ordinances</h4>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.75); margin: 0; line-height: 1.7;">Real-time legislative tracking and archive access.</p>
+            </div>
+            
+            <div class="feature-card-transparency" style="background: linear-gradient(180deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.02)); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 24px; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: pointer;">
+              <div class="card-glow-top" style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #60a5fa, transparent); opacity: 0; transition: opacity 0.4s; animation: borderGlow 3s ease-in-out infinite;"></div>
+              
+              <div style="width: 52px; height: 52px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; transition: all 0.4s ease; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);">
+                <span class="material-symbols-outlined" style="font-size: 24px;">monetization_on</span>
+              </div>
+              <h4 style="font-size: 17px; font-weight: 900; color: rgba(255, 255, 240, 0.95); margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: -0.02em; transition: color 0.3s;">Procurement Hub</h4>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.75); margin: 0; line-height: 1.7;">Public bidding transparency and expense monitoring.</p>
+            </div>
+            
+          </div>
+        </div>
+        
+        <!-- RIGHT: Phone -->
+        <div class="reveal reveal-delay-3" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="phone-trans" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+              <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247efc7683b4e96510d0b.jpg" alt="Transparency Portal" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+            </div>
+          </div>
+          
+          <div class="caption-trans reveal reveal-delay-4" style="position: absolute; top: 100px; right: 70px; background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.3); max-width: 200px; z-index: 20; box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #60a5fa;">Public Record</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">Ordinance #2026-01 Verified</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Voice of the People Section -->
+  <section class="reveal reveal-delay-1" id="voice" style="padding: 100px 20px; background: linear-gradient(180deg, #0A192F 0%, #0D1F3C 100%); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(168, 85, 247, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <div style="position: absolute; bottom: -150px; left: -150px; width: 450px; height: 450px; background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent); border-radius: 50%; filter: blur(80px);"></div>
+    
+    <div style="position: absolute; top: -100px; right: -100px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(147, 51, 234, 0.12), transparent); border-radius: 50%; filter: blur(70px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div id="voice-grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: Phone -->
+        <div class="reveal reveal-delay-2" id="voice-phone" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="phone-voice" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.4s ease, box-shadow 0.4s ease; ">
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+              <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247f0f13bc31209472927.jpg" alt="Voice of the People" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+            </div>
+          </div>
+          
+          <div class="reveal reveal-delay-3" class="caption-voice" style="position: absolute; top: 50%; left: -30px; transform: translateY(-50%); background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(168, 85, 247, 0.3); max-width: 200px; z-index: 20; box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #c084fc;">Real-time Feed</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">98% Satisfaction Rate</p>
+          </div>
+        </div>
+        
+        <!-- RIGHT: Content -->
+        <div id="voice-content">
+          <!-- Icon & Label -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: 0 0 30px rgba(168, 85, 247, 0.4); animation: iconPulsePurple 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #c084fc; font-size: 24px;">record_voice_over</span>
+            </div>
+            
+            <span style="color: #c084fc; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              BECAUSE EVERYONE MATTERS
+            </span>
+          </div>
+
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(168, 85, 247, 0.3);">
+            Voice of the People
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.8); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.75; font-weight: 500;">
+            Empowering residents to share authentic feedback on public service and local governance. Rate officials and celebrate acts of service.
+          </p>
+          
+          <!-- Feature Card -->
+          <div class="feature-card-voice reveal reveal-delay-3" style="background: linear-gradient(180deg, rgba(168, 85, 247, 0.08), rgba(168, 85, 247, 0.02)); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 16px; padding: 28px; margin-bottom: 24px; position: relative; overflow: hidden; cursor: pointer; transition: all 0.4s ease;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #c084fc, transparent); animation: borderGlow 3s ease-in-out infinite;"></div>
+            
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+              <div style="width: 52px; height: 52px; background: rgba(168, 85, 247, 0.15); color: #c084fc; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 20px rgba(168, 85, 247, 0.2); transition: all 0.4s ease;">
+                <span class="material-symbols-outlined" style="font-size: 26px;">sync</span>
+              </div>
+              <div>
+                <h4 style="font-size: 17px; font-weight: 900; color: rgba(255, 255, 240, 0.95); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: -0.02em; transition: color 0.3s;">Continuous Feedback Loop</h4>
+                <p style="font-size: 14px; color: rgba(255, 255, 240, 0.75); margin: 0; line-height: 1.7;">
+                  Creates a continuous feedback loop between leadership and the community to improve services.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Checklist -->
+          <ul class="reveal reveal-delay-4" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #c084fc; font-size: 20px; flex-shrink: 0;">star</span>
+              Rate City Officials
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #c084fc; font-size: 20px; flex-shrink: 0;">forum</span>
+              Anonymous Feedback
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #c084fc; font-size: 20px; flex-shrink: 0;">military_tech</span>
+              Service Awards
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #c084fc; font-size: 20px; flex-shrink: 0;">analytics</span>
+              Impact Reporting
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <style>
+  /* Blue Theme Animations */
+  @keyframes iconPulseBlue {
+    0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
+    50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.7), 0 0 80px rgba(59, 130, 246, 0.4); }
+  }
+
+  /* Purple Theme Animations */
+  @keyframes iconPulsePurple {
+    0%, 100% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.4); }
+    50% { box-shadow: 0 0 50px rgba(168, 85, 247, 0.7), 0 0 80px rgba(168, 85, 247, 0.4); }
+  }
+
+  @keyframes borderGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+
+  .feature-card-transparency:hover {
+    transform: translateY(-6px);
+    border-color: rgba(59, 130, 246, 0.6);
+    box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(180deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.04));
+  }
+
+  .feature-card-transparency:hover .card-glow-top {
+    opacity: 1;
+  }
+
+  .feature-card-transparency:hover h4 {
+    color: #60a5fa;
+  }
+
+  .feature-card-transparency:hover > div:nth-child(2) {
+    transform: scale(1.1);
+    background: rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+  }
+  /* Voice Section Hover Effects */
+  .phone-trans:hover {
+    transform: scale(1.08) translateY(-8px);
+  box-shadow: 0 30px 80px rgba(59, 130, 246, 0.5);
+  z-index: 22;
+  }
+
+  /* Voice Section Hover Effects */
+  .phone-voice:hover {
+    transform: scale(1.08) translateY(-8px);
+    box-shadow: 0 30px 80px rgba(168, 85, 247, 0.5);
+    z-index: 22;
+  }
+
+  .feature-card-voice:hover {
+    transform: translateY(-6px);
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 12px 32px rgba(168, 85, 247, 0.3);
+    background: linear-gradient(180deg, rgba(168, 85, 247, 0.12), rgba(168, 85, 247, 0.04));
+  }
+
+  .feature-card-voice:hover h4 {
+    color: #c084fc;
+  }
+
+  .feature-card-voice:hover > div:nth-child(2) > div:first-child {
+    transform: scale(1.1) rotate(180deg);
+    background: rgba(168, 85, 247, 0.2);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #transparency, #voice {
+      padding: 80px 20px !important;
+    }
+    
+    #transparency > div > div,
+    #voice-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    
+    #transparency > div > div > div:first-child > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+    
+    #voice-content > ul {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .caption-trans, .caption-voice {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      margin-top: 20px !important;
+      z-index: 20;
+    }
+  }
+
+  @media (max-width: 479px) {
+    #voice-phone {
+      order: 2;
+    }
+    
+    #voice-content {
+      order: 1;
+    }
+    
+    .phone-voice {
+      max-width: 200px !important;
+    }
+  }
+
+  @media (min-width: 480px) and (max-width: 639px) {
+    #voice-phone {
+      order: 2;
+    }
+    
+    #voice-content {
+      order: 1;
+    }
+    
+    .phone-voice {
+      max-width: 220px !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #voice-grid {
+      grid-template-columns: 1fr 2fr !important;
+    }
+  }
+  </style>
+
+
+  <!-- Healthcare Section -->
+  <section class="reveal reveal-delay-1" id="healthcare" style="padding: 100px 20px; background: linear-gradient(180deg, #0D1F3C 0%, #0A192F 100%); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(244, 63, 94, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(244, 63, 94, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(244, 63, 94, 0.12), transparent); border-radius: 50%; filter: blur(60px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: Content -->
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.3); box-shadow: 0 0 30px rgba(244, 63, 94, 0.3); animation: iconPulse 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #f87171; font-size: 24px;">medical_services</span>
+            </div>
+            
+            <span style="color: #f87171; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              Modern healthcare, mula sa puso.
+            </span>
+          </div>
+          
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(244, 63, 94, 0.3);">
+            Digital Healthcare
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            Partnering with Doctor Anywhere to provide 24/7 telehealth access. Residents enjoy a 10% discount on all consultations.
+          </p>
+          
+          <!-- Checklist -->
+          <ul class="reveal reveal-delay-3" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #f87171; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              24/7 Telehealth
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #f87171; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              10% Partner Discount
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #f87171; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              Digital Rx Hub
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: rgba(255, 255, 240, 0.9);">
+              <span class="material-symbols-outlined" style="color: #f87171; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              Medicine Delivery
+            </li>
+          </ul>
+        </div>
+        
+        <!-- RIGHT: Phone -->
+        <div class="reveal reveal-delay-3" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="phone-health" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+              <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247ef98efbd7df598ed4d.jpg" alt="Digital Healthcare Screen" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+            </div>
+          </div>
+          
+          <div class="reveal reveal-delay-4" class="caption" style="position: absolute; top: 30px; right: 50px; background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(244, 63, 94, 0.3); max-width: 200px; z-index: 20;">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #f87171;">Telemedicine</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">Doctor online now</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Fitness Section -->
+  <section class="reveal reveal-delay-1" id="fitness" style="padding: 100px 20px; background: linear-gradient(180deg, #0A192F 0%, #0D1F3C 100%); position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(16, 185, 129, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <div style="position: absolute; bottom: -150px; left: -150px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(16, 185, 129, 0.1), transparent); border-radius: 50%; filter: blur(80px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div id="fitness-grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: Phone -->
+        <div class="reveal reveal-delay-2" id="fitness-phone" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="phone-fitness" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+              <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247f098efbd254098ed4e.jpg" alt="Fitness App Screen" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+            </div>
+          </div>
+          
+          <div class="reveal reveal-delay-3" class="caption" style="position: absolute; top: 30px; right: 15px; background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3); max-width: 200px; z-index: 20;">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #10b981;">Fitness Hub</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">Track your health easily</p>
+          </div>
+        </div>
+        
+        <!-- RIGHT: Content -->
+        <div id="fitness-content">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); animation: iconPulseGreen 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #10b981; font-size: 24px;">fitness_center</span>
+            </div>
+            
+            <span style="color: #10b981; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              Your Digital Fitness Coach
+            </span>
+          </div>
+          
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(16, 185, 129, 0.3);">
+            Fitness & Wellness
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            Track your health with built-in TDEE, BMR, and BMI calculators. Get free personalized workout plans.
+          </p>
+          
+          <!-- Metrics -->
+          <div class="reveal reveal-delay-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+            
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 20px; border-radius: 12px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);"></div>
+              <p style="margin: 0 0 8px 0; font-weight: 900; font-size: 11px; color: rgba(16, 185, 129, 0.8); text-transform: uppercase; letter-spacing: 0.1em;">BMI</p>
+              <p class="reveal reveal-delay-4" style="margin: 0; font-weight: 900; font-size: 32px; color: #10b981; font-style: italic;">22.4</p>
+            </div>
+            
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 20px; border-radius: 12px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);"></div>
+              <p style="margin: 0 0 8px 0; font-weight: 900; font-size: 11px; color: rgba(16, 185, 129, 0.8); text-transform: uppercase; letter-spacing: 0.1em;">BMR</p>
+              <p class="reveal reveal-delay-4" style="margin: 0; font-weight: 900; font-size: 32px; color: #10b981; font-style: italic;">1,650</p>
+            </div>
+            
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 20px; border-radius: 12px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);"></div>
+              <p style="margin: 0 0 8px 0; font-weight: 900; font-size: 11px; color: rgba(16, 185, 129, 0.8); text-transform: uppercase; letter-spacing: 0.1em;">TDEE</p>
+              <p class="reveal reveal-delay-4" style="margin: 0; font-weight: 900; font-size: 32px; color: #10b981; font-style: italic;">2,100</p>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <style>
+  @keyframes iconPulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(244, 63, 94, 0.3); }
+    50% { box-shadow: 0 0 50px rgba(244, 63, 94, 0.6), 0 0 80px rgba(244, 63, 94, 0.3); }
+  }
+
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  .phone-health:hover {
+    transform: scale(1.08) translateY(-8px);
+    box-shadow: 0 30px 80px rgba(244, 63, 94, 0.4);
+    z-index: 22;
+  }
+
+  .phone-fitness:hover {
+    transform: scale(1.08) translateY(-8px);
+    box-shadow: 0 30px 80px rgba(16, 185, 129, 0.4);
+    z-index: 22;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #healthcare, #fitness {
+      padding: 80px 20px !important;
+    }
+    
+    #healthcare > div > div,
+    #fitness-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    
+    #healthcare > div > div > div:first-child > ul,
+    #fitness-content > div:last-child {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .caption {
+      position: relative !important;
+      bottom: auto !important;
+      right: auto !important;
+      margin-top: 20px !important;
+    }
+  }
+
+  @media (max-width: 479px) {
+    #fitness-content {
+      order: 1;
+    }
+    
+    #fitness-phone {
+      order: 2;
+      margin-top: 20px;
+    }
+    
+    #fitness-phone .phone-fitness {
+      width: 200px !important;
+    }
+  }
+
+  @media (min-width: 480px) and (max-width: 639px) {
+    #fitness-content {
+      order: 1;
+    }
+    
+    #fitness-phone {
+      order: 2;
+      margin-top: 20px;
+    }
+    
+    #fitness-phone .phone-fitness {
+      width: 220px !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #fitness-grid {
+      grid-template-columns: 1fr 2fr !important;
+    }
+  }
+  </style>
+
+
+  <!-- Jobs & Businesses Section -->
+  <section class="reveal reveal-delay-1" id="jobs" style="padding: 100px 20px; background: linear-gradient(180deg, #0D1F3C 0%, #0A192F 100%); position: relative; overflow: hidden;">
+    
+    <!-- Background Grid Animation -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(59, 130, 246, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <!-- Ambient Glow -->
+    <div style="position: absolute; bottom: -150px; right: -150px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent); border-radius: 50%; filter: blur(80px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 60px; align-items: center;">
+
+        <!-- LEFT: CONTENT -->
+        <div style="width: 100%;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); animation: iconPulseBlue 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #3b82f6; font-size: 24px;">work</span>
+            </div>
+            <span style="color: #3b82f6; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              Empowering Local Growth
+            </span>
+          </div>
+
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);">
+            Jobs & Businesses
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            Connecting the local workforce with businesses. A centralized hub for employment and commercial growth.
+          </p>
+
+          <!-- Comparison Cards with VS Badge -->
+          <div class="reveal reveal-delay-3" style="position: relative; display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px;">
+            
+            <!-- Before Card -->
+            <div class="compare-card-before" style="padding: 20px; background: rgba(71, 85, 105, 0.15); border: 2px solid rgba(148, 163, 184, 0.3); border-radius: 12px; position: relative; overflow: hidden; transition: all 0.3s;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent); animation: borderGlow 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 8px; left: 8px; background: rgba(148, 163, 184, 0.3); padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 900; color: rgba(255, 255, 240, 0.7); text-transform: uppercase; letter-spacing: 0.1em;">OLD WAY</div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 12px 0;">
+                <span style="font-size: 11px; font-weight: 900; color: rgba(255, 255, 240, 0.5); text-transform: uppercase; letter-spacing: 0.1em;">WITHOUT MyLGU</span>
+                <span style="font-size: 12px; font-weight: 700; color: rgba(255, 255, 240, 0.6); display: flex; align-items: center; gap: 4px;">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">search_off</span> Scattered
+                </span>
+              </div>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); font-weight: 600; line-height: 1.7; margin: 0;">
+                Unreliable FB groups and physical bulletin boards.
+              </p>
+            </div>
+
+            <!-- VS Circle Badge -->
+          <div style="position: absolute; left:45%; top: 50%; transform: translate(-50%, -50%); z-index: 10; width: 50px; height: 50px; background: linear-gradient(135deg, #1e3a8a 0%, #0A192F 100%); border: 2px solid #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(59, 130, 246, 0.6); animation: vsPulseBlue 2s ease-in-out infinite;">
+              <span style="font-size: 18px; font-weight: 900; font-style: italic; color: #3b82f6;">VS</span>
+            </div>
+
+            <!-- After Card -->
+            <div class="compare-card-after" style="padding: 20px; background: rgba(29, 78, 216, 0.2); border: 2px solid rgba(59, 130, 246, 0.5); border-radius: 12px; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.2); position: relative; overflow: hidden; transition: all 0.3s; animation: cardGlowBlue 2s ease-in-out infinite;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); animation: borderGlowBlue 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 8px; left: 8px; background: rgba(59, 130, 246, 0.4); padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 900; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 4px;">
+                <span class="material-symbols-outlined" style="font-size: 10px;">bolt</span>
+                NEW WAY
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 12px 0;">
+                <span style="font-size: 11px; font-weight: 900; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.1em;">WITH MyLGU</span>
+                <span style="font-size: 12px; font-weight: 700; color: #60a5fa; display: flex; align-items: center; gap: 4px;">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">verified</span> Verified
+                </span>
+              </div>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.95); font-weight: 700; line-height: 1.7; margin: 0;">
+                Centralized Business Directory & Verified Jobs Portal.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature List -->
+          <div class="reveal reveal-delay-4" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #3b82f6; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Verified job postings</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #3b82f6; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Local business directory</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #3b82f6; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Direct employer contact</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #3b82f6; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Real-time updates</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: DUAL PHONES -->
+        <div class="reveal reveal-delay-3" id="jobs-phones" style="position: relative; height: 500px;">
+
+          <!-- LEFT PHONE: Jobs -->
+          <div id="jobs-phone-left" style="position: absolute; left: -20px; top: 50%; transform: translateY(-60%) scale(0.95); z-index: 2;">
+            <div class="phone-jobs" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+              <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+              <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+                <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247ef98efbdf2b698ed4c.jpg" alt="Jobs Screen" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+              </div>
+            </div>
+
+            <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.3); white-space: nowrap; z-index: 20;">
+              <p style="font-size: 12px; font-weight: 900; color: #3b82f6; margin: 0;">Jobs</p>
+            </div>
+          </div>
+
+          <!-- RIGHT PHONE: Business -->
+          <div id="jobs-phone-right" style="position: absolute; right: -20px; top: 50%; transform: translateY(-40%) scale(0.95); z-index: 1; opacity: 0.9;">
+            <div class="phone-business" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+              <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+              <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+                <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247eff8a93b1c39736d55.jpg" alt="Business Screen" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+              </div>
+            </div>
+
+            <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.3); white-space: nowrap; z-index: 20;">
+              <p style="font-size: 12px; font-weight: 900; color: #3b82f6; margin: 0;">Business</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Styles -->
+    <style>
+      /* Animations */
+      @keyframes gridMove {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(40px, 40px); }
+      }
+
+      @keyframes iconPulseBlue {
+        0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); }
+        50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.3); }
+      }
+
+      @keyframes vsPulseBlue {
+        0%, 100% {
+          box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(59, 130, 246, 0.4);
+          transform: translateY(-50%) scale(1);
+        }
+        50% {
+          box-shadow: 0 0 0 4px #0A192F, 0 8px 32px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4);
+          transform: translateY(-50%) scale(1.05);
+        }
+      }
+
+      @keyframes cardGlowBlue {
+        0%, 100% { 
+          box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.2); 
+        }
+        50% { 
+          box-shadow: 0 8px 40px rgba(59, 130, 246, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2); 
+        }
+      }
+
+      @keyframes borderGlow {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.7; }
+      }
+
+      @keyframes borderGlowBlue {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+
+      .phone-jobs:hover, .phone-business:hover {
+        transform: scale(1.08) translateY(-8px);
+        box-shadow: 0 30px 80px rgba(59, 130, 246, 0.4);
+      }
+
+      .compare-card-before:hover {
+        transform: translateY(-4px);
+        border-color: rgba(148, 163, 184, 0.5);
+      }
+
+      .compare-card-after:hover {
+        transform: translateY(-4px);
+        border-color: rgba(59, 130, 246, 0.7);
+      }
+      
+      /* Mobile Small (320px - 479px) */
+      @media (max-width: 479px) {
+        #jobs {
+          padding: 80px 20px !important;
+        }
+
+        #jobs > div > div {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+        
+        #jobs-phones {
+          height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: 30px !important;
+          padding: 20px 0 !important;
+        }
+        
+        #jobs-phone-left,
+        #jobs-phone-right {
+          position: relative !important;
+          left: auto !important;
+          right: auto !important;
+          top: auto !important;
+          transform: none !important;
+          z-index: 1 !important;
+          opacity: 1 !important;
+        }
+        
+        .phone-jobs, .phone-business {
+          width: 180px !important;
+        }
+
+        #jobs > div > div > div:first-child > div:nth-child(3) {
+          grid-template-columns: 1fr !important;
+        }
+
+        #jobs > div > div > div:first-child > div:last-child {
+          grid-template-columns: 1fr !important;
+        }
+
+        #jobs > div > div > div:first-child > div:nth-child(3) > div:first-child {
+          left: 50% !important;
+          top: -24px !important;
+          transform: translateX(-50%) !important;
+        }
+      }
+      
+      /* Mobile Medium (480px - 639px) */
+      @media (min-width: 480px) and (max-width: 639px) {
+        #jobs {
+          padding: 80px 20px !important;
+        }
+
+        #jobs > div > div {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+        
+        #jobs-phones {
+          height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: 35px !important;
+        }
+        
+        #jobs-phone-left,
+        #jobs-phone-right {
+          position: relative !important;
+          left: auto !important;
+          right: auto !important;
+          top: auto !important;
+          transform: none !important;
+          z-index: 1 !important;
+          opacity: 1 !important;
+        }
+        
+        .phone-jobs, .phone-business {
+          width: 200px !important;
+        }
+
+        #jobs > div > div > div:first-child > div:last-child {
+          grid-template-columns: 1fr !important;
+        }
+
+        #jobs > div > div > div:first-child > div:nth-child(3) > div:first-child {
+          left: 50% !important;
+          top: -24px !important;
+          transform: translateX(-50%) !important;
+        }
+      }
+      
+      /* Tablet (640px - 767px) */
+      @media (min-width: 640px) and (max-width: 767px) {
+        #jobs > div > div {
+          grid-template-columns: 1fr !important;
+          gap: 50px !important;
+        }
+        
+        #jobs-phones {
+          height: 400px !important;
+        }
+        
+        #jobs-phone-left {
+          left: 10% !important;
+          transform: translateY(-55%) !important;
+        }
+        
+        #jobs-phone-right {
+          right: 10% !important;
+          transform: translateY(-45%) !important;
+        }
+        
+        .phone-jobs, .phone-business {
+          width: 200px !important;
+        }
+      }
+      
+      /* Tablet Large (768px - 1023px) */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        #jobs > div > div {
+          grid-template-columns: 3fr 2fr !important;
+          gap: 40px !important;
+        }
+        
+        #jobs-phones {
+          height: 450px !important;
+        }
+        
+        #jobs-phone-left {
+          left: 0 !important;
+          transform: translateY(-58%) !important;
+        }
+        
+        #jobs-phone-right {
+          right: 0 !important;
+          transform: translateY(-42%) !important;
+        }
+        
+        .phone-jobs, .phone-business {
+          width: 220px !important;
+        }
+      }
+      
+      /* Desktop (1024px - 1279px) */
+      @media (min-width: 1024px) and (max-width: 1279px) {
+        #jobs > div > div {
+          grid-template-columns: 3fr 2fr !important;
+          gap: 50px !important;
+        }
+        
+        #jobs-phones {
+          height: 500px !important;
+        }
+        
+        #jobs-phone-left {
+          left: -10px !important;
+          transform: translateY(-60%) scale(0.92) !important;
+        }
+        
+        #jobs-phone-right {
+          right: -10px !important;
+          transform: translateY(-40%) scale(0.92) !important;
+        }
+      }
+      
+      /* Desktop Large (1280px+) */
+      @media (min-width: 1280px) {
+        #jobs > div > div {
+          grid-template-columns: 3fr 2fr !important;
+        }
+      }
+    </style>
+  </section>
+
+  <!-- Tourist Spots Section -->
+  <section class="reveal reveal-delay-1" id="tourist" style="padding: 100px 20px; background: linear-gradient(180deg, #0A192F 0%, #0D1F3C 100%); position: relative; overflow: hidden;">
+    
+    <!-- Background Grid Animation -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-size: 40px 40px; background-image: linear-gradient(rgba(6, 182, 212, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.5) 1px, transparent 1px); animation: gridMove 20s linear infinite;"></div>
+      
+    <!-- Ambient Glow -->
+    <div style="position: absolute; top: -150px; right: -150px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(6, 182, 212, 0.1), transparent); border-radius: 50%; filter: blur(80px);"></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <div id="tourist-grid" style="display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center;">
+        
+        <!-- LEFT: Phone -->
+        <div class="reveal reveal-delay-2" id="tourist-phone" style="position: relative; display: flex; justify-content: center; align-items: center;">
+          <div class="phone-tourist" style="position: relative; width: 250px; aspect-ratio: 9/19.5; background: #1e293b; border-radius: 24px; padding: 5px; border: 5px solid #0f172a; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; background: #0f172a; border-radius: 0 0 12px 12px; z-index: 21;"></div>
+            <div style="width: 100%; height: 100%; border-radius: 20px; overflow: hidden;">
+              <img src="https://storage.googleapis.com/msgsndr/Ozt5YQu8a3FB0jZGBotv/media/696247f098efbd970c98ed4f.jpg" alt="Tourist App Screen" style="width: 100%; height: 100%; object-fit: cover; display: block;"/>
+            </div>
+          </div>
+          
+          <div class="reveal reveal-delay-3" class="caption" style="position: absolute; top: 50%; left: -25px; transform: translateY(-50%); background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(12px); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(6, 182, 212, 0.3); max-width: 200px; z-index: 20;">
+            <p style="font-size: 12px; font-weight: 900; text-transform: uppercase; margin: 0 0 4px 0; color: #06b6d4;">Verified</p>
+            <p style="font-size: 13px; font-weight: 700; margin: 0; color: rgba(255, 255, 240, 0.9); line-height: 1.4;">Cultural Heritage Site</p>
+          </div>
+        </div>
+        
+        <!-- RIGHT: Content -->
+        <div id="tourist-content">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.3); box-shadow: 0 0 30px rgba(6, 182, 212, 0.3); animation: iconPulseCyan 2s ease-in-out infinite;">
+              <span class="material-symbols-outlined" style="color: #06b6d4; font-size: 24px;">map</span>
+            </div>
+            <span style="color: #06b6d4; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em;">
+              Discover One Destination at a Time
+            </span>
+          </div>
+          
+          <h2 class="reveal reveal-delay-2" style="font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin: 0 0 20px 0; line-height: 1.1; color: #FFFFF0; text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 0 0 40px rgba(6, 182, 212, 0.3);">
+            Tourist Spots
+          </h2>
+          
+          <p class="reveal reveal-delay-2" style="color: rgba(255, 255, 240, 0.7); font-size: clamp(14px, 2vw, 16px); margin-bottom: 32px; line-height: 1.7; font-weight: 500;">
+            Explore the hidden gems of your city. Verified landmarks, eco-tourism sites, and historical spots all in one interactive map.
+          </p>
+          
+          <!-- Comparison Cards -->
+          <div class="reveal reveal-delay-3" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; position: relative;">
+            
+            <!-- Before Card -->
+            <div class="compare-card-tourist-before" style="padding: 20px; background: rgba(71, 85, 105, 0.15); border: 2px solid rgba(148, 163, 184, 0.3); border-radius: 12px; position: relative; overflow: hidden; transition: all 0.3s;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent); animation: borderGlow 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 6px; left: 6px; background: rgba(148, 163, 184, 0.3); padding: 3px 6px; border-radius: 4px; font-size: 8px; font-weight: 900; color: rgba(255, 255, 240, 0.7); text-transform: uppercase; letter-spacing: 0.1em;">OLD WAY</div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 12px 0;">
+                <span style="font-size: 11px; font-weight: 900; color: rgba(255, 255, 240, 0.5); text-transform: uppercase; letter-spacing: 0.1em;">WITHOUT MyLGU</span>
+                <span style="font-size: 12px; font-weight: 700; color: rgba(255, 255, 240, 0.6); display: flex; align-items: center; gap: 4px;">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">location_off</span> Hidden
+                </span>
+              </div>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.7); font-weight: 600; line-height: 1.7; margin: 0;">
+                Hard-to-find locations and unofficial blogs.
+              </p>
+            </div>
+
+            <!-- VS Circle Badge -->
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; width: 48px; height: 48px; background: linear-gradient(135deg, #0e7490 0%, #0A192F 100%); border: 2px solid #06b6d4; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(6, 182, 212, 0.6); animation: vsPulseCyan 2s ease-in-out infinite;">
+              <span style="font-size: 14px; font-weight: 900; font-style: italic; color: #06b6d4;">VS</span>
+            </div>
+            
+            <!-- After Card -->
+            <div class="compare-card-tourist-after" style="padding: 20px; background: rgba(8, 145, 178, 0.15); border: 2px solid rgba(6, 182, 212, 0.5); border-radius: 12px; box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3), 0 0 0 1px rgba(6, 182, 212, 0.2); position: relative; overflow: hidden; transition: all 0.3s; animation: cardGlowCyan 2s ease-in-out infinite;">
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); animation: borderGlowCyan 2s ease-in-out infinite;"></div>
+              <div style="position: absolute; top: 6px; left: 6px; background: rgba(6, 182, 212, 0.4); padding: 3px 6px; border-radius: 4px; font-size: 8px; font-weight: 900; color: #a5f3fc; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 3px;">
+                <span class="material-symbols-outlined" style="font-size: 9px;">bolt</span>
+                NEW WAY
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 12px 0;">
+                <span style="font-size: 11px; font-weight: 900; color: #22d3ee; text-transform: uppercase; letter-spacing: 0.1em;">WITH MyLGU</span>
+                <span style="font-size: 12px; font-weight: 700; color: #22d3ee; display: flex; align-items: center; gap: 4px;">
+                  <span class="material-symbols-outlined" style="font-size: 14px;">verified</span> Verified
+                </span>
+              </div>
+              <p style="font-size: 13px; color: rgba(255, 255, 240, 0.95); font-weight: 700; line-height: 1.7; margin: 0;">
+                Verified Municipal Tourism hub with booking.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Feature List -->
+          <div class="reveal reveal-delay-4" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #06b6d4; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Interactive map</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #06b6d4; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Verified landmarks</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #06b6d4; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Booking system</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="material-symbols-outlined" style="color: #06b6d4; font-size: 20px; flex-shrink: 0;">check_circle</span>
+              <span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 240, 0.9);">Cultural heritage</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Styles -->
+    <style>
+      @keyframes iconPulseCyan {
+        0%, 100% { box-shadow: 0 0 30px rgba(6, 182, 212, 0.3); }
+        50% { box-shadow: 0 0 50px rgba(6, 182, 212, 0.6), 0 0 80px rgba(6, 182, 212, 0.3); }
+      }
+
+      @keyframes cardGlowCyan {
+        0%, 100% { 
+          box-shadow: 0 8px 32px rgba(6, 182, 212, 0.2), 0 0 0 1px rgba(6, 182, 212, 0.2); 
+        }
+        50% { 
+          box-shadow: 0 8px 40px rgba(6, 182, 212, 0.4), 0 0 0 1px rgba(6, 182, 212, 0.4), 0 0 60px rgba(6, 182, 212, 0.2); 
+        }
+      }
+
+      @keyframes borderGlowCyan {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+
+      @keyframes vsPulseCyan {
+        0%, 100% {
+          box-shadow: 0 0 0 4px #0A192F, 0 8px 24px rgba(6, 182, 212, 0.4);
+          transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+          box-shadow: 0 0 0 4px #0A192F, 0 8px 32px rgba(6, 182, 212, 0.8), 0 0 40px rgba(6, 182, 212, 0.4);
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+      }
+
+      .phone-tourist:hover {
+        transform: scale(1.08) translateY(-8px);
+        box-shadow: 0 30px 80px rgba(6, 182, 212, 0.4);
+        z-index: 22;
+      }
+
+      .compare-card-tourist-before:hover {
+        transform: translateY(-4px);
+        border-color: rgba(148, 163, 184, 0.5);
+      }
+
+      .compare-card-tourist-after:hover {
+        transform: translateY(-4px);
+        border-color: rgba(6, 182, 212, 0.7);
+      }
+
+      /* Mobile Small (320px - 479px) */
+      @media (max-width: 479px) {
+        #tourist {
+          padding: 80px 20px !important;
+        }
+
+        #tourist-grid {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+
+        #tourist-content {
+          order: 1;
+        }
+
+        #tourist-phone {
+          order: 2;
+        }
+
+        #tourist-phone .phone-tourist {
+          width: 200px !important;
+        }
+
+        .caption {
+          position: relative !important;
+          left: auto !important;
+          top: auto !important;
+          transform: none !important;
+          margin-top: 20px !important;
+        }
+
+        #tourist-content > div:nth-child(3) {
+          grid-template-columns: 1fr !important;
+        }
+
+        #tourist-content > div:nth-child(3) > div:first-child {
+          left: 50% !important;
+          top: -20px !important;
+          transform: translateX(-50%) !important;
+        }
+
+        #tourist-content > div:last-child {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* Mobile Medium (480px - 639px) */
+      @media (min-width: 480px) and (max-width: 639px) {
+        #tourist {
+          padding: 80px 20px !important;
+        }
+
+        #tourist-grid {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+
+        #tourist-content {
+          order: 1;
+        }
+
+        #tourist-phone {
+          order: 2;
+        }
+
+        #tourist-phone .phone-tourist {
+          width: 220px !important;
+        }
+
+        .caption {
+          position: relative !important;
+          left: auto !important;
+          top: auto !important;
+          transform: none !important;
+          margin-top: 20px !important;
+        }
+
+        #tourist-content > div:nth-child(3) {
+          grid-template-columns: 1fr !important;
+        }
+
+        #tourist-content > div:nth-child(3) > div:first-child {
+          left: 50% !important;
+          top: -20px !important;
+          transform: translateX(-50%) !important;
+        }
+
+        #tourist-content > div:last-child {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* Tablet (640px - 767px) */
+      @media (min-width: 640px) and (max-width: 767px) {
+        #tourist-grid {
+          grid-template-columns: 1fr !important;
+          gap: 50px !important;
+        }
+
+        #tourist-phone .phone-tourist {
+          width: 230px !important;
+        }
+
+        #tourist-content > div:last-child {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* Tablet Large (768px - 1023px) */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        #tourist-grid {
+          grid-template-columns: 1fr 2fr !important;
+          gap: 40px !important;
+        }
+
+        #tourist-phone .phone-tourist {
+          width: 240px !important;
+        }
+      }
+
+      /* Desktop (1024px+) */
+      @media (min-width: 1024px) {
+        #tourist-grid {
+          grid-template-columns: 1fr 2fr !important;
+        }
+      }
+    </style>
+  </section>
+
+  <!-- Municipal Services Section -->
+  <section id="service" style="
+    padding: 110px 20px;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(30,64,175,.25), transparent 60%),
+      radial-gradient(800px 500px at 90% 20%, rgba(2,132,199,.18), transparent 60%),
+      linear-gradient(180deg, #020617, #020617);
+    position: relative;
+    overflow: hidden;
+  ">
+
+    <div class="container" style="max-width:1200px;margin:0 auto;position:relative;z-index:2;">
+
+      <!-- Header -->
+      <div class="reveal reveal-delay-1" style="max-width:780px;margin:0 auto 70px;text-align:center;">
+        <div style="
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          padding:10px 20px;
+          border-radius:999px;
+          background:rgba(59,130,246,.12);
+          border:1px solid rgba(59,130,246,.35);
+          color:#93c5fd;
+          font-size:11px;
+          font-weight:700;
+          letter-spacing:.18em;
+          text-transform:uppercase;
+          margin-bottom:22px;
+          box-shadow: 0 0 30px rgba(59,130,246,.2);
+        ">
+          <span class="material-symbols-outlined" style="font-size:18px;">account_balance</span>
+          EVERYTHING YOU NEED IN ONE PLACE
+        </div>
+
+        <h2 class="reveal reveal-delay-2" style="
+          font-size:clamp(34px,5vw,52px);
+          font-weight:900;
+          letter-spacing:-.03em;
+          background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin-bottom:18px;
+          text-shadow: 0 0 60px rgba(59,130,246,.3);
+        ">
+          MUNICIPAL SERVICES
+        </h2>
+
+        <p class="reveal reveal-delay-2" style="
+          font-size:17px;
+          color:rgba(226,232,240,.8);
+          line-height:1.8;
+          max-width: 600px;
+          margin: 0 auto;
+        ">
+          Ditch the lines and paperwork. Access a comprehensive suite of municipal services in a few taps.
+        </p>
+      </div>
+
+      <!-- Services Grid with Staggered Layout -->
+      <div class="reveal reveal-delay-4" style="
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+        gap:28px;
+      ">
+
+        <!-- CARD 1 -->
+        <div class="gov-card" style="animation-delay: 0s;">
+          <div class="card-glow"></div>
+          <div class="gov-icon">
+            <span class="material-symbols-outlined">stadium</span>
+          </div>
+          <h4>Facility Booking</h4>
+          <p>Reserve courts, halls, and community spaces with real-time availability.</p>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="gov-card" style="animation-delay: 0.1s;">
+          <div class="card-glow"></div>
+          <div class="gov-icon">
+            <span class="material-symbols-outlined">emergency_share</span>
+          </div>
+          <h4>Medical & Transport</h4>
+          <p>Request emergency transport and healthcare assistance efficiently.</p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="gov-card" style="animation-delay: 0.2s;">
+          <div class="card-glow"></div>
+          <div class="gov-icon">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <h4>Training & OFW Aid</h4>
+          <p>Apply for livelihood programs and overseas worker support services.</p>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="gov-card" style="animation-delay: 0.3s;">
+          <div class="card-glow"></div>
+          <div class="gov-icon">
+            <span class="material-symbols-outlined">engineering</span>
+          </div>
+          <h4>Infrastructure Reports</h4>
+          <p>Submit concerns for roads, lighting, sanitation, and utilities.</p>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="gov-card" style="animation-delay: 0.4s;">
+          <div class="card-glow"></div>
+          <div class="gov-icon">
+            <span class="material-symbols-outlined">description</span>
+          </div>
+          <h4>Document Requests</h4>
+          <p>Secure digital processing for permits and official certificates.</p>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="gov-card" style="animation-delay: 0.5s;">
+          <div class="card-glow"></div>
+          <div class="gov-icon">
+            <span class="material-symbols-outlined">payments</span>
+          </div>
+          <h4>Scholarships & Aid</h4>
+          <p>Access benefits for students, seniors, and persons with disabilities.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Barangay Operation Center -->
+  <section id="barangay" style="
+    padding:120px 20px;
+    background:
+      radial-gradient(900px 500px at 0% 10%, rgba(37,99,235,.18), transparent 60%),
+      linear-gradient(180deg, #020617, #020617);
+    position:relative;
+    overflow:hidden;
+  ">
+
+    <div class="container" style="max-width:1200px;margin:0 auto;">
+
+      <!-- Header -->
+      <div class="reveal reveal-delay-1 style="max-width:720px;margin-bottom:64px;">
+        <div style="
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          padding:10px 20px;
+          border-radius:999px;
+          background:rgba(37,99,235,.15);
+          border:1px solid rgba(37,99,235,.4);
+          color:#93c5fd;
+          font-size:11px;
+          font-weight:800;
+          letter-spacing:.18em;
+          text-transform:uppercase;
+          margin-bottom:18px;
+          box-shadow: 0 0 30px rgba(37,99,235,.2);
+        ">
+          <span class="material-symbols-outlined" style="font-size:18px;">shield</span>
+          LGU ADMIN CONTROL
+        </div>
+
+        <h2 class="reveal reveal-delay-2" style="
+          font-size:clamp(30px,6vw,48px);
+          font-weight:900;
+          line-height:1.15;
+          background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin-bottom:16px;
+        ">
+          Barangay Operation Center
+        </h2>
+
+        <p class="reveal reveal-delay-2" style="
+          color:rgba(226,232,240,.8);
+          font-size:16px;
+          line-height:1.75;
+          max-width:52ch;
+        ">
+          A centralized command system built to manage records, services, and programs with precision and accountability.
+        </p>
+      </div>
+
+      <!-- Command Panel -->
+      <div class="reveal reveal-delay-3" style="
+        position:relative;
+        border-radius:26px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+        border:1px solid rgba(148,163,184,.18);
+        padding:clamp(32px,5vw,48px);
+        backdrop-filter:blur(6px);
+        box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      ">
+
+        <!-- Animated Accent Lines -->
+        <div style="
+          position:absolute;
+          top:0;
+          left:0;
+          right:0;
+          height:2px;
+          background:linear-gradient(90deg, transparent, #3b82f6, transparent);
+          animation: borderScan 3s ease-in-out infinite;
+        "></div>
+        
+        <div style="
+          position:absolute;
+          top:12%;
+          bottom:12%;
+          left:0;
+          width:6px;
+          border-radius:8px;
+          background:linear-gradient(180deg,#38bdf8,#2563eb);
+          opacity:.7;
+          box-shadow: 0 0 20px rgba(59,130,246,.5);
+        "></div>
+
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 36px;">
+          <div style="
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 15px #22c55e;
+            animation: pulse 2s ease-in-out infinite;
+          "></div>
+          <h4 style="
+            font-size:20px;
+            font-weight:800;
+            color:#e5e7eb;
+            margin:0;
+          ">
+            Core Administrative Capabilities
+          </h4>
+        </div>
+
+        <div class="reveal reveal-delay-4" id="barangay-grid" style="
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+          gap:26px;
+        ">
+
+          <!-- ITEM 1 -->
+          <div class="admin-item">
+            <div class="admin-icon">
+              <span class="material-symbols-outlined">contact_page</span>
+            </div>
+            <h5>Unified Records</h5>
+            <p>Centralized citizen profiles and household data.</p>
+            <div class="item-badge">Active</div>
+          </div>
+
+          <!-- ITEM 2 -->
+          <div class="admin-item">
+            <div class="admin-icon">
+              <span class="material-symbols-outlined">confirmation_number</span>
+            </div>
+            <h5>Service Tickets</h5>
+            <p>Track, assign, and resolve community requests.</p>
+            <div class="item-badge">Active</div>
+          </div>
+
+          <!-- ITEM 3 -->
+          <div class="admin-item">
+            <div class="admin-icon">
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+            <h5>Payments & Certificates</h5>
+            <p>Digital issuance, fees, and approvals.</p>
+            <div class="item-badge">Active</div>
+          </div>
+
+          <!-- ITEM 4 -->
+          <div class="admin-item">
+            <div class="admin-icon">
+              <span class="material-symbols-outlined">architecture</span>
+            </div>
+            <h5>Project Monitoring</h5>
+            <p>Oversee barangay programs and infrastructure.</p>
+            <div class="item-badge">Active</div>
+          </div>
+
+          <!-- ITEM 5 -->
+          <div class="admin-item">
+            <div class="admin-icon">
+              <span class="material-symbols-outlined">web</span>
+            </div>
+            <h5>Microsite Builder</h5>
+            <p>Launch announcements and public pages instantly.</p>
+            <div class="item-badge">Active</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+  /* Card Glow Effect */
+  .card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  /* Enhanced Card Style */
+  .gov-card {
+    position: relative;
+    padding: 32px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+    border: 1px solid rgba(148,163,184,.15);
+    backdrop-filter: blur(6px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Left Accent Bar with Glow */
+  .gov-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 4px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #38bdf8, #2563eb);
+    opacity: 0.6;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 15px rgba(59,130,246,.4);
+  }
+
+  .gov-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(59,130,246,.6);
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    box-shadow: 0 25px 60px rgba(2,132,199,.35), 0 0 0 1px rgba(59,130,246,.3);
+  }
+
+  .gov-card:hover::before {
+    opacity: 1;
+    top: 10%;
+    bottom: 10%;
+    box-shadow: 0 0 25px rgba(59,130,246,.6);
+  }
+
+  .gov-card:hover .card-glow {
+    opacity: 1;
+  }
+
+  .gov-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Enhanced Icon */
+  .gov-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(59,130,246,.15);
+    border: 1px solid rgba(59,130,246,.35);
+    color: #93c5fd;
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(59,130,246,.2);
+  }
+
+  .gov-card:hover .gov-icon {
+    background: rgba(59,130,246,.25);
+    border-color: rgba(59,130,246,.5);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 30px rgba(59,130,246,.4);
+  }
+
+  .gov-icon span {
+    font-size: 28px;
+  }
+
+  /* Arrow Indicator */
+  .card-arrow {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(59,130,246,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #93c5fd;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease;
+  }
+
+  .card-arrow span {
+    font-size: 20px;
+  }
+
+  /* Text */
+  .gov-card h4 {
+    color: #f1f5f9;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .gov-card:hover h4 {
+    color: #93c5fd;
+  }
+
+  .gov-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(226,232,240,.75);
+    margin: 0;
+    padding-right: 20px;
+  }
+
+  /* Admin Item Enhancements */
+  .admin-item {
+    position: relative;
+    padding: 28px 26px 30px;
+    border-radius: 18px;
+    background: rgba(2,6,23,.55);
+    border: 1px solid rgba(148,163,184,.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .admin-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .admin-item:hover {
+    transform: translateY(-8px);
+    border-color: rgba(59,130,246,.5);
+    box-shadow: 0 20px 50px rgba(2,132,199,.3);
+    background: rgba(2,6,23,.7);
+  }
+
+  .admin-item:hover::before {
+    opacity: 1;
+  }
+
+  .admin-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(59,130,246,.18);
+    border: 1px solid rgba(59,130,246,.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #93c5fd;
+    margin-bottom: 18px;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(59,130,246,.2);
+  }
+
+  .admin-item:hover .admin-icon {
+    background: rgba(59,130,246,.25);
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(59,130,246,.4);
+  }
+
+  .admin-icon span {
+    font-size: 28px;
+  }
+
+  .admin-item h5 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+  }
+
+  .admin-item:hover h5 {
+    color: #93c5fd;
+  }
+
+  .admin-item p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(226,232,240,.7);
+    margin: 0;
+  }
+
+  /* Active Badge */
+  .item-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: rgba(34,197,94,.15);
+    border: 1px solid rgba(34,197,94,.3);
+    color: #22c55e;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Animations */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes borderScan {
+    0%, 100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #service, #barangay {
+      padding: 80px 20px;
+    }
+    
+    .gov-card, .admin-item {
+      padding: 24px;
+    }
+  }
+  </style>
+
+  <footer class="reveal reveal-delay-1" id="footer" style="
+    background:#020617;
+    padding:60px 20px;
+    color:#cbd5e1;
+    border-top:1px solid rgba(148,163,184,.15);
+  ">
+    <div class="container" style="max-width:1200px;margin:0 auto;">
+
+      <div class="footer-grid" style="
+        display:grid;
+        grid-template-columns:1.2fr 1fr 1.2fr;
+        gap:40px;
+        align-items:center;
+      ">
+
+        <!-- BRAND -->
+        <div class="reveal reveal-delay-2">
+          <div style="
+            font-size:20px;
+            font-weight:900;
+            color:#f8fafc;
+            margin-bottom:10px;
+          ">
+            MyLGU
+          </div>
+          <p style="
+            font-size:13px;
+            color:#64748b;
+            max-width:260px;
+            line-height:1.6;
+          ">
+            The ultimate smart governance platform for city operations and citizen engagement.
+          </p>
+        </div>
+
+        <!-- LINKS -->
+        <div class="reveal reveal-delay-3">
+          <h4 style="
+            font-size:14px;
+            font-weight:800;
+            color:#e5e7eb;
+            margin-bottom:12px;
+          ">
+            Platform
+          </h4>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li style="font-size:13px;color:#64748b;margin-bottom:6px;">
+              Citizen Portal
+            </li>
+            <li style="font-size:13px;color:#64748b;">
+              Barangay Admin
+            </li>
+          </ul>
+        </div>
+
+        <!-- RIGHT SIDE CTA -->
+        <div class="reveal reveal-delay-4" style="text-align:right;">
+          <h4 style="
+            font-size:20px;
+            font-weight:900;
+            color:#f8fafc;
+            margin-bottom:6px;
+          ">
+            Ready for the Future?
+          </h4>
+
+          <p style="
+            font-size:13px;
+            color:#94a3b8;
+            margin-bottom:18px;
+          ">
+            Modernize your municipality today.
+          </p>
+
+          <a href="https://c8nnect.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+            <button class="gov-cta">
+              Contact Us
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <style>
+  /* CTA BUTTON */
+  .gov-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:12px 22px;
+    border-radius:12px;
+
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+    color:#ffffff;
+
+    border:none;
+    outline:none;
+    cursor:pointer;
+    white-space:nowrap;
+
+    transition:transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+  }
+
+  .gov-cta:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(37,99,235,.45);
+    opacity:.95;
+  }
+
+  .gov-cta:active{
+    transform:translateY(0);
+    box-shadow:0 6px 18px rgba(37,99,235,.35);
+  }
+
+  .gov-cta span{
+    font-size:16px;
+  }
+
+  /* MOBILE FIX */
+  @media (max-width:768px){
+    .footer-grid{
+      grid-template-columns:1fr !important;
+      text-align:left;
+    }
+
+    .footer-grid > div:last-child{
+      text-align:left;
+      margin-top:24px;
+    }
+  }
+  </style>
+
+  <script>
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileNav = document.getElementById("mobileNav");
+
+    menuToggle.addEventListener("click", () => {
+      mobileNav.classList.toggle("active");
+    });
+  </script>
+  </body></html>
